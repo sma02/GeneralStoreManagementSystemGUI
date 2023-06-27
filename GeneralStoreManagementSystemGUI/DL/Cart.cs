@@ -9,12 +9,10 @@ namespace GeneralStoreManagementSystemGUI.DL
 {
     public class Cart : ProductList
     {
-        public override bool AddProduct(Product product)
+        public override void AddProduct(Product product)
         {
             Products.Add(product);
-            if (product.Quantity == 0) return false;
             product.Quantity--;
-            return true;
         }
         public double CalculateTotal()
         {

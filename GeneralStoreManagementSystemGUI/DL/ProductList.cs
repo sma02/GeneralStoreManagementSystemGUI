@@ -1,6 +1,7 @@
 ﻿
 using GeneralStoreManagementSystemGUI.BL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GeneralStoreManagementSystemGUI.DL
 {
-    public class ProductList : GenericList
+    public class ProductList : GenericList , IProductList
     {
         protected readonly List<Product> Products;
         public ProductList(string databasePath) : base(databasePath)
@@ -20,9 +21,13 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             Products = new List<Product>();
         }
-        public List<Product> GetList()
+        public  IEnumerable GetList()
         {
             return Products;
+        }
+        public IEnumerable GetList(string searchTerm)
+        {
+            return Products.FindAll(x => x.Name.Contains(searchTerm));
         }
         public bool IsExists(string productName)
         {
@@ -32,28 +37,15 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             return Products.Find(x => x.Name == productName);
         }
-        public virtual bool AddProduct(Product product)
+        public virtual void AddProduct(Product product)
         {
-            if (IsExists(product.Name))
-            {
-                return false;
-            }
             Products.Add(product);
             StoreData();
-            return true;
         }
-        public bool RemoveProduct(string productName)
+        public void RemoveProduct(string productName)
         {
-            if (IsExists(productName))
-            {
                 Products.RemoveAll(x => x.Name == productName);
                 StoreData();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         protected override void FromCSV(string data)

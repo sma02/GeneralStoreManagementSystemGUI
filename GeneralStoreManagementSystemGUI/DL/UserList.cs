@@ -77,6 +77,7 @@ namespace GeneralStoreManagementSystemGUI.DL
 
         protected override void FromCSV(string data)
         {
+            if (data == null) return;
             StringReader stream = new StringReader(data);
             string line;
             while ((line = stream.ReadLine()) != null)
