@@ -38,9 +38,10 @@ namespace GeneralStoreManagementSystemGUI.DL
         public IEnumerable GetUsers(string searchTerm)
         {
             return users.FindAll(x =>
-                    x.Username.ToLower().Contains(searchTerm) || x.GetType().Name.ToLower().Contains(searchTerm))
+                    x.Username.ToLower()
+                        .Contains(searchTerm) || x.GetType().Name.ToLower().Contains(searchTerm))
                 .Select(x => new { x.Username, Type = x.GetType().Name })
-                ?.ToList();
+                .ToList();
         }
 
         public bool IsExists(string username)

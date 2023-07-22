@@ -9,6 +9,13 @@ namespace GeneralStoreManagementSystemGUI.BL
 {
     public class Product : Serializable
     {
+        private string name;
+        private double costPrice;
+        private double retailPrice;
+        private float taxPercentage;
+        private float discountPercentage;
+        private float profitPercentage;
+        private int quantity;
         public Product(string name, double costPrice, float profitPercentage, int quantity)
         {
             Name = name;
@@ -23,11 +30,6 @@ namespace GeneralStoreManagementSystemGUI.BL
             RetailPrice = retailPrice;
             Quantity = quantity;
         }
-        private string name;
-        private double costPrice;
-        private double retailPrice;
-        private float profitPercentage;
-        private int quantity;
         public string Name { get => name; set => name = value; }
         public double CostPrice
         {
@@ -64,13 +66,40 @@ namespace GeneralStoreManagementSystemGUI.BL
             set => quantity = Math.Abs(value);
         }
 
+        public float TaxPercentage
+        {
+            get => taxPercentage;
+            set
+            {
+                taxPercentage = value;
+                CalculateRetailPrice();
+            }
+        }
+
+        public float DiscountPercentage
+        {
+            get => discountPercentage;
+            set
+            {
+                discountPercentage = value;
+                CalculateRetailPrice();
+            }
+        }
+
         public override string ToString(string separator)
         {
-            return name + separator + costPrice + separator + profitPercentage + separator + quantity;
+            return string.Format("{0}{6}{1}{6}{2}{6}{3}{6}{4}{6}{5}",
+                name,
+                costPrice,
+                profitPercentage,
+                discountPercentage,
+                taxPercentage,
+                quantity,
+                separator);
         }
         private void CalculateRetailPrice()
         {
-            retailPrice = costPrice * (100 + profitPercentage) / 100;
+            retailPrice = (costPrice * (100 + profitPercentage - discountPercentage + taxPercentage) / 100);
         }
         private void CalculateProfitPercentage()
         {

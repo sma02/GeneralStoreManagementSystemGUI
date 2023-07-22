@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GeneralStoreManagementSystemGUI.BL;
+using GeneralStoreManagementSystemGUI.DL;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,55 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GeneralStoreManagementSystemGUI.BL;
 
 namespace GeneralStoreManagementSystemGUI.UI
 {
-    public partial class UserView : Form, IUserView
+    public partial class UserView : Form
     {
-        public UserView()
-        {
-            InitializeComponent();
-            tabControl1.TabPages.Remove(tabPageUserEntry);
-            textBoxSearchTerm.KeyDown += TextBoxSearchTerm_KeyDown;
-            buttonSearch.Click += (sender, args) =>
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-                textBoxSearchTerm.Focus();
-            };
-            buttonAdd.Click += ButtonAdd_Click;
-            buttonSave.Click += ButtonSave_Click;
-        }
-
-        private void ButtonSave_Click(object sender, EventArgs args)
-        {
-            SaveEvent?.Invoke(sender, args);
-            if (!IsSuccessful)
-            {
-                MessageBox.Show(Message);
-            }
-            else
-            {
-                tabControl1.TabPages.Add(tabPageUserList);
-                tabControl1.TabPages.Remove(tabPageUserEntry);
-            }
-        }
-
-        private void ButtonAdd_Click(object sender, EventArgs e)
-        {
-            tabControl1.TabPages.Remove(tabPageUserList);
-            tabControl1.TabPages.Add(tabPageUserEntry);
-            AddEvent?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void TextBoxSearchTerm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
-            }
-        }
-
+        private readonly IUserList list;
         public string Username
         {
             get => textBoxUsername.Text;
@@ -72,22 +31,71 @@ namespace GeneralStoreManagementSystemGUI.UI
             get => comboBoxRole.Text;
             set => comboBoxRole.Text = value;
         }
-        public string SearchTerm
+        private UserView()
         {
-            get => textBoxSearchTerm.Text;
-            set => textBoxSearchTerm.Text = value;
+            InitializeComponent();
+            searchView = new SearchViewControl();
+            searchView.Visible = true;
+            searchView.Dock = DockStyle.Fill;
+            panelUserData.Visible = false;
+            Controls.Add(searchView);
+            searchView.SearchEvent += SearchView_SearchEvent;
+            searchView.AddEvent += SearchView_AddEvent;
         }
 
-        public bool IsSuccessful { get; set; }
-        public string Message { get; set; }
-        public event EventHandler SearchEvent;
-        public event EventHandler AddEvent;
-        public event EventHandler RemoveEvent;
-        public event EventHandler EditEvent;
-        public event EventHandler SaveEvent;
-        public IEnumerable DataSource
+        private void SearchView_AddEvent(object sender, EventArgs e)
         {
-            set => dataGridView1.DataSource = value;
+            panelUserData.Visible = true;
+            searchView.Visible = false;
+        }
+
+        public UserView(UserList list) : this()
+        {
+            this.list = list;
+            this.list.LoadData();
+            searchView.DataSource = this.list.GetUsers();
+        }
+
+        private void SearchView_SearchEvent(object sender, EventArgs e)
+        {
+            IEnumerable users = string.IsNullOrWhiteSpace(((SearchViewControl)sender).SearchTerm)
+     ? list.GetUsers()
+     : list.GetUsers(searchView.SearchTerm);
+            searchView.DataSource = users;
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            searchView.Visible = true;
+            panelUserData.Visible = false;
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                User user;
+                switch (Role.ToLower())
+                {
+                    case "admin":
+                        user = new Admin(Username, Password);
+                        break;
+                    case "cashier":
+                        user = new Cashier(Username, Password);
+                        break;
+                    default:
+                        user = new User(Username, Password);
+                        break;
+                }
+                list.RegisterUser(user);
+                searchView.DataSource = list.GetUsers();
+                searchView.Visible = true;
+                panelUserData.Visible = false;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

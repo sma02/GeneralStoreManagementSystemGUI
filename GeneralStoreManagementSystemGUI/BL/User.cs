@@ -12,23 +12,38 @@ namespace GeneralStoreManagementSystemGUI.BL
         private string password;
         public User(string username, string password)
         {
-            if (username.Length == 0)
-                throw new Exception("username can't be empty");
-            if (password.Length == 0)
-                throw new Exception("password can't be empty");
-            if (password.Length < 8)
-                throw new Exception("password length can't be less than 8");
-            this.username = username;
-            this.password = password;
+            Username = username;
+            Password = password;
         }
-        public User(User user):this(user.Username,user.Password)
+        public User(User user) : this(user.Username, user.Password)
         {
             username = user.Username;
             password = user.Password;
         }
 
-        public string Username { get => username; set => username = value; }
-        public string Password { get => password; set => password = value; }
+        public string Username
+        {
+            get => username;
+            set
+            {
+                if (value.Length == 0)
+                    throw new Exception("username can't be empty");
+                username = value;
+            }
+        }
+
+        public string Password
+        {
+            get => password;
+            set
+            {
+                if (value.Length == 0)
+                    throw new Exception("password can't be empty");
+                if (value.Length < 8)
+                    throw new Exception("password length can't be less than 8");
+                password = value;
+            }
+        }
 
         public override string ToString(string separator)
         {
