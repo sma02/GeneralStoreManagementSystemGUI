@@ -41,6 +41,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             Controls.Add(searchView);
             searchView.SearchEvent += SearchView_SearchEvent;
             searchView.AddEvent += SearchView_AddEvent;
+            comboBoxRole.SelectedItem = "User";
         }
 
         private void SearchView_AddEvent(object sender, EventArgs e)
@@ -83,9 +84,11 @@ namespace GeneralStoreManagementSystemGUI.UI
                     case "cashier":
                         user = new Cashier(Username, Password);
                         break;
-                    default:
+                    case "user":
                         user = new User(Username, Password);
                         break;
+                    default:
+                        throw new Exception("Invalid User");
                 }
                 list.RegisterUser(user);
                 searchView.DataSource = list.GetUsers();
