@@ -43,6 +43,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // panelUserData
             // 
+            this.panelUserData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.panelUserData.Controls.Add(this.buttonCancel);
             this.panelUserData.Controls.Add(this.buttonSave);
             this.panelUserData.Controls.Add(this.comboBoxRole);
@@ -55,59 +56,86 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.panelUserData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelUserData.Location = new System.Drawing.Point(0, 0);
             this.panelUserData.Name = "panelUserData";
-            this.panelUserData.Size = new System.Drawing.Size(800, 450);
+            this.panelUserData.Size = new System.Drawing.Size(594, 450);
             this.panelUserData.TabIndex = 0;
+            this.panelUserData.Paint += new System.Windows.Forms.PaintEventHandler(this.panelUserData_Paint);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(435, 372);
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.buttonCancel.FlatAppearance.BorderSize = 0;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCancel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonCancel.Location = new System.Drawing.Point(498, 402);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(84, 36);
             this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(221, 372);
+            this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.buttonSave.FlatAppearance.BorderSize = 0;
+            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSave.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonSave.Location = new System.Drawing.Point(96, 402);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(84, 36);
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // comboBoxRole
             // 
+            this.comboBoxRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxRole.BackColor = System.Drawing.Color.DimGray;
+            this.comboBoxRole.DropDownWidth = 486;
+            this.comboBoxRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxRole.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.comboBoxRole.FormattingEnabled = true;
             this.comboBoxRole.Items.AddRange(new object[] {
             "Admin",
             "Cashier",
             "User"});
-            this.comboBoxRole.Location = new System.Drawing.Point(221, 246);
+            this.comboBoxRole.Location = new System.Drawing.Point(96, 246);
             this.comboBoxRole.Name = "comboBoxRole";
-            this.comboBoxRole.Size = new System.Drawing.Size(298, 28);
+            this.comboBoxRole.Size = new System.Drawing.Size(486, 28);
             this.comboBoxRole.TabIndex = 5;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(221, 168);
+            this.textBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxPassword.BackColor = System.Drawing.Color.DimGray;
+            this.textBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxPassword.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxPassword.Location = new System.Drawing.Point(96, 168);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(298, 26);
+            this.textBoxPassword.Size = new System.Drawing.Size(486, 19);
             this.textBoxPassword.TabIndex = 4;
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(221, 99);
+            this.textBoxUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxUsername.BackColor = System.Drawing.Color.DimGray;
+            this.textBoxUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxUsername.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxUsername.Location = new System.Drawing.Point(96, 99);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(298, 26);
+            this.textBoxUsername.Size = new System.Drawing.Size(486, 19);
             this.textBoxUsername.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(110, 248);
+            this.label3.ForeColor = System.Drawing.Color.LightGray;
+            this.label3.Location = new System.Drawing.Point(48, 249);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 20);
             this.label3.TabIndex = 2;
@@ -116,7 +144,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(96, 174);
+            this.label2.ForeColor = System.Drawing.Color.LightGray;
+            this.label2.Location = new System.Drawing.Point(12, 168);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 1;
@@ -125,7 +154,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             // labelUsername
             // 
             this.labelUsername.AutoSize = true;
-            this.labelUsername.Location = new System.Drawing.Point(96, 105);
+            this.labelUsername.ForeColor = System.Drawing.Color.LightGray;
+            this.labelUsername.Location = new System.Drawing.Point(12, 99);
             this.labelUsername.Name = "labelUsername";
             this.labelUsername.Size = new System.Drawing.Size(83, 20);
             this.labelUsername.TabIndex = 0;
@@ -135,10 +165,11 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(594, 450);
             this.Controls.Add(this.panelUserData);
             this.Name = "UserView";
             this.Text = "UserView";
+            this.Resize += new System.EventHandler(this.UserView_Resize);
             this.panelUserData.ResumeLayout(false);
             this.panelUserData.PerformLayout();
             this.ResumeLayout(false);

@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Runtime.InteropServices;
+
 namespace GeneralStoreManagementSystemGUI
 {
     partial class MainView
@@ -12,6 +15,15 @@ namespace GeneralStoreManagementSystemGUI
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+        [DllImport("DwmApi")] //System.Runtime.InteropServices
+        private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            if (DwmSetWindowAttribute(Handle, 19, new[] { 1 }, 4) != 0)
+                DwmSetWindowAttribute(Handle, 20, new[] { 1 }, 4);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -38,6 +50,7 @@ namespace GeneralStoreManagementSystemGUI
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(46)))), ((int)(((byte)(47)))));
             this.panel1.Controls.Add(this.btnUserManagement);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -48,14 +61,18 @@ namespace GeneralStoreManagementSystemGUI
             // 
             // btnUserManagement
             // 
+            this.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnUserManagement.FlatAppearance.BorderSize = 0;
+            this.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUserManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUserManagement.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnUserManagement.Location = new System.Drawing.Point(0, 100);
             this.btnUserManagement.Name = "btnUserManagement";
             this.btnUserManagement.Size = new System.Drawing.Size(200, 38);
             this.btnUserManagement.TabIndex = 1;
             this.btnUserManagement.Text = "User Management";
-            this.btnUserManagement.UseVisualStyleBackColor = true;
+            this.btnUserManagement.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
@@ -67,6 +84,7 @@ namespace GeneralStoreManagementSystemGUI
             // 
             // panelFormContainer
             // 
+            this.panelFormContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.panelFormContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFormContainer.Location = new System.Drawing.Point(200, 0);
             this.panelFormContainer.Name = "panelFormContainer";

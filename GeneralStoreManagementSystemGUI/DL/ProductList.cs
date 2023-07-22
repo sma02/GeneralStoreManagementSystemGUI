@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GeneralStoreManagementSystemGUI.DL
 {
-    public class ProductList : GenericList , IProductList
+    public class ProductList : GenericList
     {
         protected readonly List<Product> Products;
         public ProductList(string databasePath) : base(databasePath)

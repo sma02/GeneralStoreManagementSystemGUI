@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GeneralStoreManagementSystemGUI.DL
 {
-    public class UserList : GenericList, IUserList
+    public class UserList : GenericList
     {
         private const int UserAttributesLength = 2;
         private readonly List<User> users;

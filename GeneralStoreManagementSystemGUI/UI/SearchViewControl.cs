@@ -36,5 +36,13 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             SearchEvent?.Invoke(this, null);
         }
+
+        private void textBoxSearchTerm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchEvent?.Invoke(this, null);
+            }
+        }
     }
 }

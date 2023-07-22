@@ -15,7 +15,7 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class UserView : Form
     {
-        private readonly IUserList list;
+        private readonly UserList list;
         public string Username
         {
             get => textBoxUsername.Text;
@@ -96,6 +96,16 @@ namespace GeneralStoreManagementSystemGUI.UI
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+
+        private void UserView_Resize(object sender, EventArgs e)
+        {
+            comboBoxRole.Refresh();
+        }
+
+        private void panelUserData_Paint(object sender, PaintEventArgs e)
+        {
+            comboBoxRole.Refresh();
         }
     }
 }
