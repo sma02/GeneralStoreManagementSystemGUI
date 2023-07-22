@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeneralStoreManagementSystemGUI.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace GeneralStoreManagementSystemGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainView());
+            Application.Run(new Login());
         }
     }
 }

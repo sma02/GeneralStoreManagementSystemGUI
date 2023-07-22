@@ -19,10 +19,16 @@ namespace GeneralStoreManagementSystemGUI
         {
             InitializeComponent();
             activeForm = null;
-            btnUserManagement.Click += (s, e) =>
+            buttonUserManagement.Click += (s, e) =>
             {
                 UserList list = new UserList("userDatabase.txt");
                 Form form = new UserView(list);
+                CurrentActiveForm = form;
+            };
+            buttonProductManagement.Click += (s, e) =>
+            {
+                ProductList list = new ProductList("productDatabase.txt");
+                Form form = new ProductView(list);
                 CurrentActiveForm = form;
             };
         }

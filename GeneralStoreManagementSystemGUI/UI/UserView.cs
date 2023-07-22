@@ -15,7 +15,6 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class UserView : Form
     {
-        private readonly UserList list;
         public string Username
         {
             get => textBoxUsername.Text;
@@ -43,6 +42,12 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.AddEvent += SearchView_AddEvent;
             comboBoxRole.SelectedItem = "User";
         }
+        public UserView(UserList list) : this()
+        {
+            this.list = list;
+            this.list.LoadData();
+            searchView.DataSource = this.list.GetUsers();
+        }
 
         private void SearchView_AddEvent(object sender, EventArgs e)
         {
@@ -50,12 +55,6 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.Visible = false;
         }
 
-        public UserView(UserList list) : this()
-        {
-            this.list = list;
-            this.list.LoadData();
-            searchView.DataSource = this.list.GetUsers();
-        }
 
         private void SearchView_SearchEvent(object sender, EventArgs e)
         {

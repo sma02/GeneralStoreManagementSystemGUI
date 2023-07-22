@@ -1,4 +1,6 @@
 ﻿
+using GeneralStoreManagementSystemGUI.DL;
+
 namespace GeneralStoreManagementSystemGUI.UI
 {
     partial class UserView
@@ -189,5 +191,6 @@ namespace GeneralStoreManagementSystemGUI.UI
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
         private SearchViewControl searchView;
+        private UserList list;
     }
 }

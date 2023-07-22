@@ -9,27 +9,34 @@ namespace GeneralStoreManagementSystemGUI.BL
 {
     public class Product : Serializable
     {
+        private uint id;
         private string name;
         private double costPrice;
-        private double retailPrice;
         private float taxPercentage;
         private float discountPercentage;
         private float profitPercentage;
+        private float netProfitPercentage;
+        private double retailPrice;
+        private double netPrice;
         private int quantity;
-        public Product(string name, double costPrice, float profitPercentage, int quantity)
+        private Product(uint id, string name, double costPrice,int quantity,float taxPercentage,float discountPercentage)
         {
+            Id = id;
             Name = name;
             CostPrice = costPrice;
+            Quantity = quantity;
+            TaxPercentage = taxPercentage;
+            DiscountPercentage = discountPercentage;
+        }
+        public Product(uint id, string name, double costPrice, float profitPercentage, int quantity, float taxPercentage = 0, float discountPercentage = 0) : this(id, name, costPrice,quantity,taxPercentage,discountPercentage)
+        {
             ProfitPercentage = profitPercentage;
-            Quantity = quantity;
         }
-        public Product(string name, double costPrice, double retailPrice, int quantity)
+        public Product(uint id, string name, double costPrice, double retailPrice, int quantity, float taxPercentage = 0, float discountPercentage = 0) : this(id, name, costPrice,quantity,taxPercentage,discountPercentage)
         {
-            Name = name;
-            CostPrice = costPrice;
             RetailPrice = retailPrice;
-            Quantity = quantity;
         }
+        public uint Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public double CostPrice
         {
@@ -41,15 +48,6 @@ namespace GeneralStoreManagementSystemGUI.BL
             }
 
         }
-        public float ProfitPercentage
-        {
-            get => (float)Math.Round(profitPercentage, 2);
-            set
-            {
-                profitPercentage = Math.Abs(value);
-                CalculateRetailPrice();
-            }
-        }
         public double RetailPrice
         {
             get => Math.Round(retailPrice, 2);
@@ -60,11 +58,6 @@ namespace GeneralStoreManagementSystemGUI.BL
             }
         }
 
-        public int Quantity
-        {
-            get => quantity;
-            set => quantity = Math.Abs(value);
-        }
 
         public float TaxPercentage
         {
@@ -75,20 +68,38 @@ namespace GeneralStoreManagementSystemGUI.BL
                 CalculateRetailPrice();
             }
         }
-
+        public float ProfitPercentage
+        {
+            get => (float)Math.Round(profitPercentage, 2);
+            set
+            {
+                profitPercentage = Math.Abs(value);
+                CalculateNetProfit();
+                CalculateRetailPrice();
+            }
+        }
         public float DiscountPercentage
         {
             get => discountPercentage;
             set
             {
                 discountPercentage = value;
+                CalculateNetProfit();
                 CalculateRetailPrice();
             }
+        }
+        public float NetProfitPercentage { get => netProfitPercentage; }
+        public double NetPrice { get => netPrice; }
+        public int Quantity
+        {
+            get => quantity;
+            set => quantity = Math.Abs(value);
         }
 
         public override string ToString(string separator)
         {
-            return string.Format("{0}{6}{1}{6}{2}{6}{3}{6}{4}{6}{5}",
+            return string.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}",
+                id,
                 name,
                 costPrice,
                 profitPercentage,
@@ -99,11 +110,21 @@ namespace GeneralStoreManagementSystemGUI.BL
         }
         private void CalculateRetailPrice()
         {
-            retailPrice = (costPrice * (100 + profitPercentage - discountPercentage + taxPercentage) / 100);
+            retailPrice = (costPrice * (100 + profitPercentage + taxPercentage) / 100);
+            CalculatNetPrice();
         }
         private void CalculateProfitPercentage()
         {
             profitPercentage = (float)(retailPrice * 100 / costPrice) - 100;
+            CalculateNetProfit();
+        }
+        private void CalculateNetProfit()
+        {
+            netProfitPercentage = profitPercentage - discountPercentage;
+        }
+        private void CalculatNetPrice()
+        {
+            netPrice = (retailPrice * (100 - discountPercentage)) / 100;
         }
     }
 }

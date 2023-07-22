@@ -21,11 +21,15 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             Products = new List<Product>();
         }
-        public  IEnumerable GetList()
+        public IEnumerable GetList()
         {
             return Products;
         }
-        public IEnumerable GetList(string searchTerm)
+        public IEnumerable GetProducts()
+        {
+            return Products.Select(x=>x).ToList();
+        }
+        public IEnumerable GetProducts(string searchTerm)
         {
             return Products.FindAll(x => x.Name.Contains(searchTerm));
         }
@@ -44,8 +48,8 @@ namespace GeneralStoreManagementSystemGUI.DL
         }
         public void RemoveProduct(string productName)
         {
-                Products.RemoveAll(x => x.Name == productName);
-                StoreData();
+            Products.RemoveAll(x => x.Name == productName);
+            StoreData();
         }
 
         protected override void FromCSV(string data)
@@ -55,11 +59,14 @@ namespace GeneralStoreManagementSystemGUI.DL
             while ((line = stream.ReadLine()) != null)
             {
                 string[] attributes = line.Split(',');
-                string name = attributes[0];
-                double costPrice = double.Parse(attributes[1]);
-                float profitPercentage = float.Parse(attributes[2]);
-                int quantity = int.Parse(attributes[3]);
-                Products.Add(new Product(name, costPrice, profitPercentage, quantity));
+                uint id = uint.Parse(attributes[0]);
+                string name = attributes[1];
+                double costPrice = double.Parse(attributes[2]);
+                float profitPercentage = float.Parse(attributes[3]);
+                float taxPercentage = float.Parse(attributes[4]);
+                float discountPercentage = float.Parse(attributes[5]);
+                int quantity = int.Parse(attributes[6]);
+                Products.Add(new Product(id, name, costPrice, profitPercentage, quantity, taxPercentage, discountPercentage));
 
             }
         }

@@ -19,6 +19,26 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             set => dataGridView.DataSource = value;
         }
+        public List<string> HeaderTexts
+        {
+            set
+            {
+                if (dataGridView.DataSource != null)
+                {
+                    for (int i = 0; i < value.Count; i++)
+                    {
+                        dataGridView.Columns[i].HeaderText = value[i];
+                    }
+                }
+            }
+        }
+        public DataGridViewColumnCollection Columns
+        {
+            get
+            {
+                return dataGridView.Columns;
+            }
+        }
         public SearchViewControl()
         {
             InitializeComponent();

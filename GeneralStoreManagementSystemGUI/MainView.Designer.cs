@@ -42,16 +42,18 @@ namespace GeneralStoreManagementSystemGUI
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnUserManagement = new System.Windows.Forms.Button();
+            this.buttonUserManagement = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelFormContainer = new System.Windows.Forms.Panel();
+            this.buttonProductManagement = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(46)))), ((int)(((byte)(47)))));
-            this.panel1.Controls.Add(this.btnUserManagement);
+            this.panel1.Controls.Add(this.buttonProductManagement);
+            this.panel1.Controls.Add(this.buttonUserManagement);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -59,20 +61,20 @@ namespace GeneralStoreManagementSystemGUI
             this.panel1.Size = new System.Drawing.Size(200, 450);
             this.panel1.TabIndex = 0;
             // 
-            // btnUserManagement
+            // buttonUserManagement
             // 
-            this.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUserManagement.FlatAppearance.BorderSize = 0;
-            this.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUserManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserManagement.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnUserManagement.Location = new System.Drawing.Point(0, 100);
-            this.btnUserManagement.Name = "btnUserManagement";
-            this.btnUserManagement.Size = new System.Drawing.Size(200, 38);
-            this.btnUserManagement.TabIndex = 1;
-            this.btnUserManagement.Text = "User Management";
-            this.btnUserManagement.UseVisualStyleBackColor = false;
+            this.buttonUserManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.buttonUserManagement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonUserManagement.FlatAppearance.BorderSize = 0;
+            this.buttonUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonUserManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUserManagement.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonUserManagement.Location = new System.Drawing.Point(0, 100);
+            this.buttonUserManagement.Name = "buttonUserManagement";
+            this.buttonUserManagement.Size = new System.Drawing.Size(200, 38);
+            this.buttonUserManagement.TabIndex = 1;
+            this.buttonUserManagement.Text = "User Management";
+            this.buttonUserManagement.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
@@ -91,6 +93,21 @@ namespace GeneralStoreManagementSystemGUI
             this.panelFormContainer.Size = new System.Drawing.Size(600, 450);
             this.panelFormContainer.TabIndex = 1;
             // 
+            // buttonProductManagement
+            // 
+            this.buttonProductManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.buttonProductManagement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonProductManagement.FlatAppearance.BorderSize = 0;
+            this.buttonProductManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonProductManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonProductManagement.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonProductManagement.Location = new System.Drawing.Point(0, 138);
+            this.buttonProductManagement.Name = "buttonProductManagement";
+            this.buttonProductManagement.Size = new System.Drawing.Size(200, 38);
+            this.buttonProductManagement.TabIndex = 2;
+            this.buttonProductManagement.Text = "Product Management";
+            this.buttonProductManagement.UseVisualStyleBackColor = false;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,9 +125,10 @@ namespace GeneralStoreManagementSystemGUI
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnUserManagement;
+        private System.Windows.Forms.Button buttonUserManagement;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelFormContainer;
+        private System.Windows.Forms.Button buttonProductManagement;
     }
 }
 
