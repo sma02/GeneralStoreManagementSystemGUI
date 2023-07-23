@@ -11,15 +11,13 @@ namespace GeneralStoreManagementSystemGUI
 {
     static class Program
     {
-        static Form currentForm = null;
-        static Database database = null;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            database = new Database();
+            Database database = new Database();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             while (true)
