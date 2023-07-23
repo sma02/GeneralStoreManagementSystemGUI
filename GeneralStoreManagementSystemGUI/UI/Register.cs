@@ -49,6 +49,12 @@ namespace GeneralStoreManagementSystemGUI.UI
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
+            bool fields = Username.Length == 0 || Password.Length == 0 || Email.Length == 0 || Address.Length == 0 || !maskedTextID.MaskFull || !maskedTextPhone.MaskFull;
+            if (fields)
+            {
+                labelFieldsEmpty.Visible = true;
+                return;
+            }
             try
             {
                 User user = new User(Username, Password);

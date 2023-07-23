@@ -31,6 +31,7 @@ namespace GeneralStoreManagementSystemGUI.BL
             get => username;
             set
             {
+                value = value.Trim();
                 if (value.Length == 0)
                     throw new Exception("username can't be empty");
                 username = value;
@@ -68,13 +69,13 @@ namespace GeneralStoreManagementSystemGUI.BL
             }
         }
         public string Phone { get => phone; set => phone = value; }
-        public string Address { get => address; set => address = value; }
+        public string Address { get => address; set => address = value.Trim(); }
         public DateTime BirthDate
         {
-            get => birthDate; 
+            get => birthDate;
             set
             {
-                if(birthDate.Year<1850)
+                if (birthDate.Year < 1850)
                 {
                     throw new Exception("Invalid Birth Date");
                 }
