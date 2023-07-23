@@ -81,5 +81,10 @@ namespace GeneralStoreManagementSystemGUI.DL
             stream.Close();
             return stream.ToString();
         }
+
+        protected override void ClearList()
+        {
+            Products.Clear();
+        }
     }
 }

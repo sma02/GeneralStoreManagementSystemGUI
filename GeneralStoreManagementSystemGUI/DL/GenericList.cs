@@ -31,11 +31,13 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             if (databasePath != null)
             {
+                ClearList();
                 FromCSV(FileHandler.Load(databasePath));
             }
         }
 
         protected abstract void FromCSV(string data);
         protected abstract string ToCSV();
+        protected abstract void ClearList();
     }
 }

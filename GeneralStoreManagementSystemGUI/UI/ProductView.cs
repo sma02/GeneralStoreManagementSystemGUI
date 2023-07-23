@@ -28,7 +28,6 @@ namespace GeneralStoreManagementSystemGUI.UI
         public ProductView(ProductList list) : this()
         {
             this.list = list;
-            this.list.LoadData();
             searchView.DataSource = this.list.GetProducts();
             searchView.HeaderTexts = new List<string> { "ID", "Name", "Cost","Actual","Tax","Profit","Discount","Net Profit","Net Price","Q.ty" };
             DataGridViewColumnCollection columns = searchView.Columns;

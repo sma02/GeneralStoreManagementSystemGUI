@@ -1,4 +1,6 @@
-﻿using GeneralStoreManagementSystemGUI.UI;
+﻿using GeneralStoreManagementSystemGUI.BL;
+using GeneralStoreManagementSystemGUI.DL;
+using GeneralStoreManagementSystemGUI.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +11,29 @@ namespace GeneralStoreManagementSystemGUI
 {
     static class Program
     {
+        static Form currentForm = null;
+        static Database database = null;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            database = new Database();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            while (true)
+            {
+                DialogResult Result = (new Login(database)).ShowDialog();
+                if (Result == DialogResult.OK)
+                {
+                    (new MainView(database)).ShowDialog();
+                }
+                else if (Result == DialogResult.Cancel)
+                {
+                    break;
+                }
+            }
         }
     }
 }

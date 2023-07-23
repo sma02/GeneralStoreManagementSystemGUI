@@ -45,7 +45,6 @@ namespace GeneralStoreManagementSystemGUI.UI
         public UserView(UserList list) : this()
         {
             this.list = list;
-            this.list.LoadData();
             searchView.DataSource = this.list.GetUsers();
         }
 

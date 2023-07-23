@@ -1,4 +1,5 @@
 ﻿
+using GeneralStoreManagementSystemGUI.DL;
 using System;
 using System.Runtime.InteropServices;
 
@@ -114,6 +115,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonLogin.TabIndex = 5;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = false;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // pictureBox1
             // 
@@ -158,6 +160,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -168,6 +171,7 @@ namespace GeneralStoreManagementSystemGUI.UI
 
         #endregion
 
+        private Database database;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textUsername;

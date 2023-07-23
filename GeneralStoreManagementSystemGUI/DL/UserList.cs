@@ -48,6 +48,10 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             return users.Exists(x => x.Username == username);
         }
+        public User AuthenicatedUser(string username,string password)
+        {
+            return users.Find(x => x.Username == username && x.Password == password);
+        }
         public User GetUser(string username)
         {
             return users.Find(x => x.Username == username);
@@ -117,6 +121,11 @@ namespace GeneralStoreManagementSystemGUI.DL
             }
             stream.Close();
             return stream.ToString();
+        }
+
+        protected override void ClearList()
+        {
+            users.Clear();
         }
     }
 }

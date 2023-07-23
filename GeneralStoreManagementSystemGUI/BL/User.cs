@@ -10,6 +10,7 @@ namespace GeneralStoreManagementSystemGUI.BL
     {
         private string username;
         private string password;
+        private string id;
         public User(string username, string password)
         {
             Username = username;
@@ -44,6 +45,8 @@ namespace GeneralStoreManagementSystemGUI.BL
                 password = value;
             }
         }
+
+        public string Id { get => id; set => id = value; }
 
         public override string ToString(string separator)
         {
