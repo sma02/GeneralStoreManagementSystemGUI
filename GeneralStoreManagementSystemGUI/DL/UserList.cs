@@ -11,7 +11,7 @@ namespace GeneralStoreManagementSystemGUI.DL
 {
     public class UserList : GenericList
     {
-        private const int UserAttributesLength = 2;
+        private const int UserAttributesLength = 7;
         private readonly List<User> users;
         public UserList(string databasePath) : base(databasePath)
         {
@@ -30,25 +30,26 @@ namespace GeneralStoreManagementSystemGUI.DL
             StoreData();
             return true;
         }
+        private static IEnumerable SelectData(List<User> users)
+        {
+            return users.Select(x => new { Username = x.Username, ID = x.Id, Phone = x.Phone, Email = x.Email, Type = x.GetType().Name ,DOB =x.BirthDate,Address = x.Address})?.ToList();
+        }
         public IEnumerable GetUsers()
         {
-            return users.Select(x => new { Username = x.Username, Type = x.GetType().Name })?.ToList();
+            return SelectData(users);
         }
 
         public IEnumerable GetUsers(string searchTerm)
         {
-            return users.FindAll(x =>
-                    x.Username.ToLower()
-                        .Contains(searchTerm) || x.GetType().Name.ToLower().Contains(searchTerm))
-                .Select(x => new { x.Username, Type = x.GetType().Name })
-                .ToList();
+            List<User> data = users.FindAll(x => x.Username.ToLower().Contains(searchTerm) || x.GetType().Name.ToLower().Contains(searchTerm)||x.Id.ToLower().Contains(searchTerm));
+            return SelectData(data);
         }
 
         public bool IsExists(string username)
         {
             return users.Exists(x => x.Username == username);
         }
-        public User AuthenicatedUser(string username,string password)
+        public User AuthenicatedUser(string username, string password)
         {
             return users.Find(x => x.Username == username && x.Password == password);
         }
@@ -90,25 +91,37 @@ namespace GeneralStoreManagementSystemGUI.DL
                 string[] attributes = line.Split(',');
                 string username = attributes[0];
                 string password = attributes[1];
+                string id = attributes[2];
+                string email = attributes[3];
+                string phone = attributes[4];
+                DateTime birthDate = Convert.ToDateTime(attributes[5]);
+                string address = attributes[6];
+                User user = null;
                 if (attributes.Length > UserAttributesLength)
                 {
                     switch (attributes.Last())
                     {
                         case nameof(Admin):
-                            users.Add(new Admin(username, password));
+                            user = new Admin(username, password);
                             break;
                         case nameof(Cashier):
                             {
-                                int performance = int.Parse(attributes[2]);
-                                users.Add(new Cashier(username, password, performance));
+                                int performance = int.Parse(attributes[7]);
+                                user = new Cashier(username, password, performance);
                                 break;
                             }
                     }
                 }
                 else if (attributes.Length == UserAttributesLength)
                 {
-                    users.Add(new User(username, password));
+                    user = new User(username, password);
                 }
+                user.Id = id;
+                user.Email = email;
+                user.Address = address;
+                user.Phone = phone;
+                user.BirthDate = birthDate;
+                users.Add(user);
             }
         }
 

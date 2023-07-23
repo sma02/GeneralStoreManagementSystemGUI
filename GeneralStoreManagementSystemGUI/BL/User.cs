@@ -73,19 +73,21 @@ namespace GeneralStoreManagementSystemGUI.BL
         public DateTime BirthDate
         {
             get => birthDate;
-            set
-            {
-                if (birthDate.Year < 1850)
-                {
-                    throw new Exception("Invalid Birth Date");
-                }
-                birthDate = value;
-            }
+            set => birthDate = value;
         }
 
         public override string ToString(string separator)
         {
-            return username + separator + password;
+            //return username + separator + password;
+            return string.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}",
+                username,
+                password,
+                id,
+                email,
+                phone,
+                birthDate.Date.ToShortDateString(),
+                address,
+                ',');
         }
     }
 }
