@@ -36,12 +36,33 @@ namespace GeneralStoreManagementSystemGUI.UI
             string username = textUsername.Text;
             string password = textPassword.Text;
             User user = database.UserList.AuthenicatedUser(username, password);
-            if(user!=null)
+            if (user != null)
             {
                 database.CurrentUser = user;
                 DialogResult = DialogResult.OK;
                 Close();
             }
+        }
+
+        private void textUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textPassword.Focus();
+            }
+        }
+
+        private void textPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonLogin.PerformClick();
+            }
+        }
+
+        private void buttonRegister_Click(object sender, EventArgs e)
+        {
+            (new Register()).ShowDialog();
         }
     }
 }

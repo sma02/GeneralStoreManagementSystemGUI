@@ -29,7 +29,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             this.list = list;
             searchView.DataSource = this.list.GetProducts();
-            searchView.HeaderTexts = new List<string> { "ID", "Name", "Cost","Actual","Tax","Profit","Discount","Net Profit","Net Price","Q.ty" };
+            searchView.HeaderTexts = new List<string> { "ID", "Name", "Rate","Price","Tax","Profit","Discount","Net Profit","Net Price","Q.ty" };
             DataGridViewColumnCollection columns = searchView.Columns;
             columns["ID"].DefaultCellStyle.Format = "D5";
             columns["CostPrice"].DefaultCellStyle.Format = "N2";

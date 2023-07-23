@@ -41,7 +41,18 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.SearchEvent += SearchView_SearchEvent;
             searchView.AddEvent += SearchView_AddEvent;
             comboBoxRole.SelectedItem = "User";
+            textBoxUsername.KeyPress += TextBoxes_KeyPress;
+            textBoxPassword.KeyPress += TextBoxes_KeyPress;
         }
+
+        private void TextBoxes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            e.Handled = Char.IsPunctuation(e.KeyChar) ||
+                  Char.IsSeparator(e.KeyChar) ||
+                  Char.IsSymbol(e.KeyChar);
+        }
+
         public UserView(UserList list) : this()
         {
             this.list = list;

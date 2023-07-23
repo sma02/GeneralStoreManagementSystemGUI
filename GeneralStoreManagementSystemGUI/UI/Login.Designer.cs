@@ -81,6 +81,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.textUsername.Name = "textUsername";
             this.textUsername.Size = new System.Drawing.Size(331, 29);
             this.textUsername.TabIndex = 2;
+            this.textUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textUsername_KeyDown);
             // 
             // textPassword
             // 
@@ -91,6 +92,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.textPassword.Name = "textPassword";
             this.textPassword.Size = new System.Drawing.Size(331, 29);
             this.textPassword.TabIndex = 3;
+            this.textPassword.UseSystemPasswordChar = true;
+            this.textPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textPassword_KeyDown);
             // 
             // label3
             // 
@@ -141,6 +144,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonRegister.TabIndex = 7;
             this.buttonRegister.Text = "Register?";
             this.buttonRegister.UseVisualStyleBackColor = false;
+            this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
             // 
             // Login
             // 

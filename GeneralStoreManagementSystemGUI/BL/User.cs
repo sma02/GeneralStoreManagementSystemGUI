@@ -11,6 +11,10 @@ namespace GeneralStoreManagementSystemGUI.BL
         private string username;
         private string password;
         private string id;
+        private string email;
+        private string phone;
+        private DateTime birthDate;
+        private string address;
         public User(string username, string password)
         {
             Username = username;
@@ -47,6 +51,25 @@ namespace GeneralStoreManagementSystemGUI.BL
         }
 
         public string Id { get => id; set => id = value; }
+        public string Email
+        {
+            get => email;
+            set
+            {
+                try
+                {
+                    var mail = new System.Net.Mail.MailAddress(value);
+                    email = mail.Address;
+                }
+                catch
+                {
+                    throw new Exception("Invalid Email");
+                }
+            }
+        }
+        public string Phone { get => phone; set => phone = value; }
+        public string Address { get => address; set => address = value; }
+        public DateTime BirthDate { get => birthDate; set => birthDate = value; }
 
         public override string ToString(string separator)
         {
