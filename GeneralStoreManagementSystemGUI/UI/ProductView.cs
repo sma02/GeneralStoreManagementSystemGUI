@@ -23,7 +23,6 @@ namespace GeneralStoreManagementSystemGUI.UI
             panelProductData.Visible = false;
             Controls.Add(searchView);
             searchView.SearchEvent += SearchView_SearchEvent;
-            searchView.AddEvent += SearchView_AddEvent;
         }
         public ProductView(ProductList list) : this()
         {

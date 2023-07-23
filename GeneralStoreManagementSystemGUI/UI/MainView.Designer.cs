@@ -3,7 +3,7 @@ using GeneralStoreManagementSystemGUI.DL;
 using System;
 using System.Runtime.InteropServices;
 
-namespace GeneralStoreManagementSystemGUI
+namespace GeneralStoreManagementSystemGUI.UI
 {
     partial class MainView
     {

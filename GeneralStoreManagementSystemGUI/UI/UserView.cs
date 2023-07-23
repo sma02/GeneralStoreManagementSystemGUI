@@ -15,21 +15,17 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class UserView : Form
     {
-        public string Username
-        {
-            get => textBoxUsername.Text;
-            set => textBoxUsername.Text = value;
-        }
-        public string Password
-        {
-            get => textBoxPassword.Text;
-            set => textBoxPassword.Text = value;
-        }
         public string Role
         {
             get => comboBoxRole.Text;
             set => comboBoxRole.Text = value;
         }
+        public string Username { set => textUsername.Text = value; }
+        public string Email { set => textEmail.Text = value; }
+        public string Address { set => textAddress.Text = value; }
+        public string Id { set => maskedTextID.Text = value; }
+        public DateTime BirthDate { set => customDateTimePicker1.Value = value; }
+        public string Phone { set => maskedTextPhone.Text = value; }
         private UserView()
         {
             InitializeComponent();
@@ -39,12 +35,24 @@ namespace GeneralStoreManagementSystemGUI.UI
             panelUserData.Visible = false;
             Controls.Add(searchView);
             searchView.SearchEvent += SearchView_SearchEvent;
-            searchView.AddEvent += SearchView_AddEvent;
+            searchView.SecondButton.Text = "Change Role";
+            searchView.SecondButton.Visible = true;
+            searchView.SecondButton.Click += SearchView_ChangeRoleEvent;
             comboBoxRole.SelectedItem = "User";
-            textBoxUsername.KeyPress += TextBoxes_KeyPress;
-            textBoxPassword.KeyPress += TextBoxes_KeyPress;
+            textUsername.KeyPress += TextBoxes_KeyPress;
         }
-
+        private void SetFields()
+        {
+            User user = list.GetUser(searchView.SelectedItemIndex);
+            Username = user.Username;
+            Email = user.Email;
+            Address = user.Address;
+            Phone = user.Phone;
+            Id = user.Id;
+            Role = user.GetType().Name;
+            BirthDate = user.BirthDate;
+            
+        }
         private void TextBoxes_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Char.IsPunctuation(e.KeyChar) ||
@@ -58,8 +66,9 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.DataSource = this.list.GetUsers();
         }
 
-        private void SearchView_AddEvent(object sender, EventArgs e)
+        private void SearchView_ChangeRoleEvent(object sender, EventArgs e)
         {
+            SetFields();
             panelUserData.Visible = true;
             searchView.Visible = false;
         }
@@ -83,22 +92,23 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             try
             {
-                User user;
+                User user = list.GetUser(searchView.SelectedItemIndex);
+                User newUser;
                 switch (Role.ToLower())
                 {
                     case "admin":
-                        user = new Admin(Username, Password);
+                        newUser = new Admin(user);
                         break;
                     case "cashier":
-                        user = new Cashier(Username, Password);
+                        newUser = new Cashier(user);
                         break;
                     case "user":
-                        user = new User(Username, Password);
+                        newUser = new User(user);
                         break;
                     default:
                         throw new Exception("Invalid User");
                 }
-                list.RegisterUser(user);
+                list.ReplaceUser(user, newUser);
                 searchView.DataSource = list.GetUsers();
                 searchView.Visible = true;
                 panelUserData.Visible = false;

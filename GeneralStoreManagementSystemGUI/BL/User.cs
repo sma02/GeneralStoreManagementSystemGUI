@@ -20,10 +20,15 @@ namespace GeneralStoreManagementSystemGUI.BL
             Username = username;
             Password = password;
         }
-        public User(User user) : this(user.Username, user.Password)
+        public User(User user)
         {
             username = user.Username;
             password = user.Password;
+            id = user.Id;
+            email = user.Email;
+            address = user.Address;
+            phone = user.Phone;
+            birthDate = user.BirthDate;
         }
 
         public string Username

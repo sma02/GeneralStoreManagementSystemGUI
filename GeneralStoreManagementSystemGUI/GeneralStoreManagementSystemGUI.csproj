@@ -57,10 +57,10 @@
     <Compile Include="DL\GenericList.cs" />
     <Compile Include="DL\ProductList.cs" />
     <Compile Include="DL\UserList.cs" />
-    <Compile Include="MainView.cs">
+    <Compile Include="UI\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainView.Designer.cs">
+    <Compile Include="UI\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="UI\UserView.Designer.cs">
       <DependentUpon>UserView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainView.resx">
+    <EmbeddedResource Include="UI\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

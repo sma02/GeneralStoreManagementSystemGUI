@@ -11,7 +11,7 @@ using GeneralStoreManagementSystemGUI.BL;
 using GeneralStoreManagementSystemGUI.DL;
 using GeneralStoreManagementSystemGUI.UI;
 
-namespace GeneralStoreManagementSystemGUI
+namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class MainView : Form
     {

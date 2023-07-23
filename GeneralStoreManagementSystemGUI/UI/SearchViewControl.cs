@@ -14,7 +14,12 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class SearchViewControl : UserControl
     {
+        public Button FirstButton => buttonFirst;
+        public Button SecondButton => buttonSecond;
+        public Button ThirdButton => buttonThird;
+        public event EventHandler SearchEvent;
         public string SearchTerm { get => textBoxSearchTerm.Text; }
+        public int SelectedItemIndex { get => dataGridView.SelectedRows[0].Index; }
         public IEnumerable DataSource
         {
             set => dataGridView.DataSource = value;
@@ -43,14 +48,6 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             InitializeComponent();
         }
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            AddEvent?.Invoke(this, null);
-        }
-        public event EventHandler SearchEvent;
-        public event EventHandler AddEvent;
-        public event EventHandler RemoveEvent;
-        public event EventHandler EditEvent;
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {

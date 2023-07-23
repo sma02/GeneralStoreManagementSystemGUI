@@ -32,9 +32,9 @@ namespace GeneralStoreManagementSystemGUI.UI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
-            this.buttonRemove = new System.Windows.Forms.Button();
-            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonSecond = new System.Windows.Forms.Button();
+            this.buttonThird = new System.Windows.Forms.Button();
+            this.buttonFirst = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.textBoxSearchTerm = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -56,51 +56,50 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // buttonEdit
+            // buttonSecond
             // 
-            this.buttonEdit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(59)))), ((int)(((byte)(61)))));
-            this.buttonEdit.FlatAppearance.BorderSize = 0;
-            this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEdit.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonEdit.Location = new System.Drawing.Point(229, 330);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(170, 42);
-            this.buttonEdit.TabIndex = 10;
-            this.buttonEdit.Text = "Edit";
-            this.buttonEdit.UseVisualStyleBackColor = false;
+            this.buttonSecond.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonSecond.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(59)))), ((int)(((byte)(61)))));
+            this.buttonSecond.FlatAppearance.BorderSize = 0;
+            this.buttonSecond.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSecond.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonSecond.Location = new System.Drawing.Point(229, 330);
+            this.buttonSecond.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonSecond.Name = "buttonSecond";
+            this.buttonSecond.Size = new System.Drawing.Size(170, 42);
+            this.buttonSecond.TabIndex = 10;
+            this.buttonSecond.UseVisualStyleBackColor = false;
+            this.buttonSecond.Visible = false;
             // 
-            // buttonRemove
+            // buttonThird
             // 
-            this.buttonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(59)))), ((int)(((byte)(61)))));
-            this.buttonRemove.FlatAppearance.BorderSize = 0;
-            this.buttonRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRemove.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonRemove.Location = new System.Drawing.Point(440, 330);
-            this.buttonRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(146, 42);
-            this.buttonRemove.TabIndex = 9;
-            this.buttonRemove.Text = "Remove";
-            this.buttonRemove.UseVisualStyleBackColor = false;
+            this.buttonThird.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonThird.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(59)))), ((int)(((byte)(61)))));
+            this.buttonThird.FlatAppearance.BorderSize = 0;
+            this.buttonThird.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonThird.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonThird.Location = new System.Drawing.Point(440, 330);
+            this.buttonThird.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonThird.Name = "buttonThird";
+            this.buttonThird.Size = new System.Drawing.Size(146, 42);
+            this.buttonThird.TabIndex = 9;
+            this.buttonThird.UseVisualStyleBackColor = false;
+            this.buttonThird.Visible = false;
             // 
-            // buttonAdd
+            // buttonFirst
             // 
-            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(59)))), ((int)(((byte)(61)))));
-            this.buttonAdd.FlatAppearance.BorderSize = 0;
-            this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAdd.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonAdd.Location = new System.Drawing.Point(18, 330);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(170, 42);
-            this.buttonAdd.TabIndex = 8;
-            this.buttonAdd.Text = "Add";
-            this.buttonAdd.UseVisualStyleBackColor = false;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonFirst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonFirst.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(59)))), ((int)(((byte)(61)))));
+            this.buttonFirst.FlatAppearance.BorderSize = 0;
+            this.buttonFirst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFirst.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonFirst.Location = new System.Drawing.Point(18, 330);
+            this.buttonFirst.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonFirst.Name = "buttonFirst";
+            this.buttonFirst.Size = new System.Drawing.Size(170, 42);
+            this.buttonFirst.TabIndex = 8;
+            this.buttonFirst.UseVisualStyleBackColor = false;
+            this.buttonFirst.Visible = false;
             // 
             // dataGridView
             // 
@@ -168,9 +167,9 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.Controls.Add(this.buttonSearch);
-            this.Controls.Add(this.buttonEdit);
-            this.Controls.Add(this.buttonRemove);
-            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.buttonSecond);
+            this.Controls.Add(this.buttonThird);
+            this.Controls.Add(this.buttonFirst);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.textBoxSearchTerm);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -186,9 +185,9 @@ namespace GeneralStoreManagementSystemGUI.UI
         #endregion
 
         private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.Button buttonEdit;
-        private System.Windows.Forms.Button buttonRemove;
-        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonSecond;
+        private System.Windows.Forms.Button buttonThird;
+        private System.Windows.Forms.Button buttonFirst;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.TextBox textBoxSearchTerm;
     }
