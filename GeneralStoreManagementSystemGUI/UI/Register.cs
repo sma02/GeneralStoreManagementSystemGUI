@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GeneralStoreManagementSystemGUI.BL;
+using GeneralStoreManagementSystemGUI.DL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,55 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class Register : Form
     {
-        public Register()
+        public string Username { get => textUsername.Text; }
+        public string Password { get => textPassword.Text; }
+        public string Email { get => textEmail.Text; }
+        public string Address { get => textAddress.Text; }
+        public string Id { get => maskedTextID.Text; }
+        public DateTime BirthDate { get => customDateTimePicker1.Value; }
+        public string Phone { get => maskedTextPhone.Text; }
+        public Register(Database database)
         {
             InitializeComponent();
+            this.database = database;
+            textUsername.KeyPress += TextBoxes_KeyPress;
+            textPassword.KeyPress += TextBoxes_KeyPress;
+            textEmail.KeyPress += TextEmail_KeyPress; ;
+            textAddress.KeyPress += TextBoxes_KeyPress;
+        }
+
+        private void TextEmail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = e.KeyChar != '@' && e.KeyChar != '.'
+                        && (char.IsPunctuation(e.KeyChar)
+                        || char.IsSeparator(e.KeyChar)
+                        || char.IsSymbol(e.KeyChar));
+        }
+
+        private void TextBoxes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = e.KeyChar != ' '
+                        && (char.IsPunctuation(e.KeyChar)
+                        || char.IsSeparator(e.KeyChar)
+                        || char.IsSymbol(e.KeyChar));
+        }
+
+        private void buttonRegister_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                User user = new User(Username, Password);
+                user.Email = Email;
+                user.Address = Address;
+                user.Id = Id;
+                user.BirthDate = BirthDate;
+                user.Phone = Phone;
+                database.UserList.RegisterUser(user);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 

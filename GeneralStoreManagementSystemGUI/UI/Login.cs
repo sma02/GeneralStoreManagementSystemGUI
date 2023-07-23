@@ -62,7 +62,7 @@ namespace GeneralStoreManagementSystemGUI.UI
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
-            (new Register()).ShowDialog();
+            (new Register(database)).ShowDialog();
         }
     }
 }

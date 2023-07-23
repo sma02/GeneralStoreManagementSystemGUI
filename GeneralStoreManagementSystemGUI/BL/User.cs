@@ -69,7 +69,18 @@ namespace GeneralStoreManagementSystemGUI.BL
         }
         public string Phone { get => phone; set => phone = value; }
         public string Address { get => address; set => address = value; }
-        public DateTime BirthDate { get => birthDate; set => birthDate = value; }
+        public DateTime BirthDate
+        {
+            get => birthDate; 
+            set
+            {
+                if(birthDate.Year<1850)
+                {
+                    throw new Exception("Invalid Birth Date");
+                }
+                birthDate = value;
+            }
+        }
 
         public override string ToString(string separator)
         {

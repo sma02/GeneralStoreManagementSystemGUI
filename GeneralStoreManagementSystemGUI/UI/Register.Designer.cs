@@ -1,4 +1,6 @@
 ﻿
+using GeneralStoreManagementSystemGUI.DL;
+
 namespace GeneralStoreManagementSystemGUI.UI
 {
     partial class Register
@@ -42,9 +44,9 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.textAddress = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.maskedTextID = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBirthDate = new System.Windows.Forms.MaskedTextBox();
             this.buttonRegister = new System.Windows.Forms.Button();
             this.textEmail = new System.Windows.Forms.TextBox();
+            this.customDateTimePicker1 = new GeneralStoreManagementSystemGUI.UI.CustomDateTimePicker();
             this.SuspendLayout();
             // 
             // textUsername
@@ -61,7 +63,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label1.Location = new System.Drawing.Point(13, 96);
+            this.label1.Location = new System.Drawing.Point(8, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 20);
             this.label1.TabIndex = 3;
@@ -81,7 +83,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(13, 169);
+            this.label2.Location = new System.Drawing.Point(8, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 5;
@@ -92,7 +94,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.Location = new System.Drawing.Point(147, 41);
+            this.label3.Location = new System.Drawing.Point(205, 45);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(252, 29);
             this.label3.TabIndex = 7;
@@ -102,7 +104,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label4.Location = new System.Drawing.Point(364, 169);
+            this.label4.Location = new System.Drawing.Point(404, 245);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 20);
             this.label4.TabIndex = 8;
@@ -112,7 +114,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label5.Location = new System.Drawing.Point(413, 169);
+            this.label5.Location = new System.Drawing.Point(364, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 20);
             this.label5.TabIndex = 10;
@@ -122,7 +124,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label6.Location = new System.Drawing.Point(13, 244);
+            this.label6.Location = new System.Drawing.Point(364, 169);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 20);
             this.label6.TabIndex = 12;
@@ -132,7 +134,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.maskedTextPhone.BackColor = System.Drawing.Color.DimGray;
             this.maskedTextPhone.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.maskedTextPhone.Location = new System.Drawing.Point(368, 279);
+            this.maskedTextPhone.Location = new System.Drawing.Point(492, 283);
             this.maskedTextPhone.Mask = "+\\92 000-0000000";
             this.maskedTextPhone.Name = "maskedTextPhone";
             this.maskedTextPhone.Size = new System.Drawing.Size(140, 26);
@@ -142,7 +144,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label7.Location = new System.Drawing.Point(364, 244);
+            this.label7.Location = new System.Drawing.Point(488, 245);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(115, 20);
             this.label7.TabIndex = 15;
@@ -153,16 +155,16 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.textAddress.BackColor = System.Drawing.Color.DimGray;
             this.textAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textAddress.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textAddress.Location = new System.Drawing.Point(12, 358);
+            this.textAddress.Location = new System.Drawing.Point(12, 280);
             this.textAddress.Name = "textAddress";
-            this.textAddress.Size = new System.Drawing.Size(496, 29);
+            this.textAddress.Size = new System.Drawing.Size(363, 29);
             this.textAddress.TabIndex = 14;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label8.Location = new System.Drawing.Point(13, 323);
+            this.label8.Location = new System.Drawing.Point(8, 245);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 20);
             this.label8.TabIndex = 16;
@@ -172,22 +174,11 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             this.maskedTextID.BackColor = System.Drawing.Color.DimGray;
             this.maskedTextID.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.maskedTextID.Location = new System.Drawing.Point(368, 204);
+            this.maskedTextID.Location = new System.Drawing.Point(408, 283);
             this.maskedTextID.Mask = "AAA";
             this.maskedTextID.Name = "maskedTextID";
-            this.maskedTextID.Size = new System.Drawing.Size(43, 26);
+            this.maskedTextID.Size = new System.Drawing.Size(49, 26);
             this.maskedTextID.TabIndex = 15;
-            // 
-            // maskedTextBirthDate
-            // 
-            this.maskedTextBirthDate.BackColor = System.Drawing.Color.DimGray;
-            this.maskedTextBirthDate.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.maskedTextBirthDate.Location = new System.Drawing.Point(417, 204);
-            this.maskedTextBirthDate.Mask = "00/00/0000";
-            this.maskedTextBirthDate.Name = "maskedTextBirthDate";
-            this.maskedTextBirthDate.Size = new System.Drawing.Size(91, 26);
-            this.maskedTextBirthDate.TabIndex = 16;
-            this.maskedTextBirthDate.ValidatingType = typeof(System.DateTime);
             // 
             // buttonRegister
             // 
@@ -195,32 +186,41 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonRegister.FlatAppearance.BorderSize = 0;
             this.buttonRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRegister.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonRegister.Location = new System.Drawing.Point(173, 415);
+            this.buttonRegister.Location = new System.Drawing.Point(238, 322);
             this.buttonRegister.Name = "buttonRegister";
             this.buttonRegister.Size = new System.Drawing.Size(186, 32);
             this.buttonRegister.TabIndex = 19;
             this.buttonRegister.Text = "Register";
             this.buttonRegister.UseVisualStyleBackColor = false;
+            this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
             // 
             // textEmail
             // 
             this.textEmail.BackColor = System.Drawing.Color.DimGray;
             this.textEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEmail.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textEmail.Location = new System.Drawing.Point(12, 276);
+            this.textEmail.Location = new System.Drawing.Point(368, 204);
             this.textEmail.Name = "textEmail";
-            this.textEmail.Size = new System.Drawing.Size(331, 29);
+            this.textEmail.Size = new System.Drawing.Size(267, 29);
             this.textEmail.TabIndex = 20;
+            // 
+            // customDateTimePicker1
+            // 
+            this.customDateTimePicker1.BackColor = System.Drawing.Color.DimGray;
+            this.customDateTimePicker1.Location = new System.Drawing.Point(368, 131);
+            this.customDateTimePicker1.Name = "customDateTimePicker1";
+            this.customDateTimePicker1.Size = new System.Drawing.Size(267, 26);
+            this.customDateTimePicker1.TabIndex = 21;
             // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            this.ClientSize = new System.Drawing.Size(527, 459);
+            this.ClientSize = new System.Drawing.Size(646, 366);
+            this.Controls.Add(this.customDateTimePicker1);
             this.Controls.Add(this.textEmail);
             this.Controls.Add(this.buttonRegister);
-            this.Controls.Add(this.maskedTextBirthDate);
             this.Controls.Add(this.maskedTextID);
             this.Controls.Add(this.textAddress);
             this.Controls.Add(this.label8);
@@ -246,7 +246,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         }
 
         #endregion
-
+        private Database database;
         private System.Windows.Forms.TextBox textUsername;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textPassword;
@@ -260,8 +260,8 @@ namespace GeneralStoreManagementSystemGUI.UI
         private System.Windows.Forms.TextBox textAddress;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.MaskedTextBox maskedTextID;
-        private System.Windows.Forms.MaskedTextBox maskedTextBirthDate;
         private System.Windows.Forms.Button buttonRegister;
         private System.Windows.Forms.TextBox textEmail;
+        private CustomDateTimePicker customDateTimePicker1;
     }
 }
