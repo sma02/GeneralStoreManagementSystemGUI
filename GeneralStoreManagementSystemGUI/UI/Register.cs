@@ -69,7 +69,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                CustomMessageBox.Show(ex.Message);
             }
         }
     }

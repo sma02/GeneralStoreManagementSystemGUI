@@ -1,5 +1,7 @@
 ﻿
 using GeneralStoreManagementSystemGUI.DL;
+using System;
+using System.Runtime.InteropServices;
 
 namespace GeneralStoreManagementSystemGUI.UI
 {
@@ -14,6 +16,14 @@ namespace GeneralStoreManagementSystemGUI.UI
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        [DllImport("DwmApi")]
+        private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            if (DwmSetWindowAttribute(Handle, 19, new[] { 1 }, 4) != 0)
+                DwmSetWindowAttribute(Handle, 20, new[] { 1 }, 4);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -46,8 +56,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.maskedTextID = new System.Windows.Forms.MaskedTextBox();
             this.buttonRegister = new System.Windows.Forms.Button();
             this.textEmail = new System.Windows.Forms.TextBox();
-            this.customDateTimePicker1 = new GeneralStoreManagementSystemGUI.UI.CustomDateTimePicker();
             this.labelFieldsEmpty = new System.Windows.Forms.Label();
+            this.customDateTimePicker1 = new GeneralStoreManagementSystemGUI.UI.CustomDateTimePicker();
             this.SuspendLayout();
             // 
             // textUsername
@@ -139,7 +149,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.maskedTextPhone.Mask = "+\\92 000-0000000";
             this.maskedTextPhone.Name = "maskedTextPhone";
             this.maskedTextPhone.Size = new System.Drawing.Size(140, 26);
-            this.maskedTextPhone.TabIndex = 17;
+            this.maskedTextPhone.TabIndex = 18;
             // 
             // label7
             // 
@@ -179,7 +189,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.maskedTextID.Mask = "AAA";
             this.maskedTextID.Name = "maskedTextID";
             this.maskedTextID.Size = new System.Drawing.Size(49, 26);
-            this.maskedTextID.TabIndex = 15;
+            this.maskedTextID.TabIndex = 17;
             // 
             // buttonRegister
             // 
@@ -203,15 +213,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.textEmail.Location = new System.Drawing.Point(367, 181);
             this.textEmail.Name = "textEmail";
             this.textEmail.Size = new System.Drawing.Size(267, 29);
-            this.textEmail.TabIndex = 20;
-            // 
-            // customDateTimePicker1
-            // 
-            this.customDateTimePicker1.BackColor = System.Drawing.Color.DimGray;
-            this.customDateTimePicker1.Location = new System.Drawing.Point(367, 108);
-            this.customDateTimePicker1.Name = "customDateTimePicker1";
-            this.customDateTimePicker1.Size = new System.Drawing.Size(267, 26);
-            this.customDateTimePicker1.TabIndex = 21;
+            this.textEmail.TabIndex = 16;
             // 
             // labelFieldsEmpty
             // 
@@ -224,6 +226,14 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.labelFieldsEmpty.TabIndex = 22;
             this.labelFieldsEmpty.Text = "*please fill all the fields";
             this.labelFieldsEmpty.Visible = false;
+            // 
+            // customDateTimePicker1
+            // 
+            this.customDateTimePicker1.BackColor = System.Drawing.Color.DimGray;
+            this.customDateTimePicker1.Location = new System.Drawing.Point(367, 108);
+            this.customDateTimePicker1.Name = "customDateTimePicker1";
+            this.customDateTimePicker1.Size = new System.Drawing.Size(267, 26);
+            this.customDateTimePicker1.TabIndex = 15;
             // 
             // Register
             // 

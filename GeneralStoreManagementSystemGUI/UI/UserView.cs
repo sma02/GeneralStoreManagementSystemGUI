@@ -35,12 +35,27 @@ namespace GeneralStoreManagementSystemGUI.UI
             panelUserData.Visible = false;
             Controls.Add(searchView);
             searchView.SearchEvent += SearchView_SearchEvent;
-            searchView.SecondButton.Text = "Change Role";
-            searchView.SecondButton.Visible = true;
-            searchView.SecondButton.Click += SearchView_ChangeRoleEvent;
+            searchView.FirstButton.Text = "Change Role";
+            searchView.FirstButton.Visible = true;
+            searchView.FirstButton.Click += SearchView_ChangeRoleEvent;
+            searchView.ThirdButton.Text = "Delete User";
+            searchView.ThirdButton.Visible = true;
+            searchView.ThirdButton.Click += DeleteUserButton_Click; ;
             comboBoxRole.SelectedItem = "User";
             textUsername.KeyPress += TextBoxes_KeyPress;
         }
+
+        private void DeleteUserButton_Click(object sender, EventArgs e)
+        {
+            User user = list.GetUser(searchView.SelectedItemIndex);
+           DialogResult result =  MessageBox.Show(this,"Are you sure you want to Delete user " + user.Username + "?", "Confirmation", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                list.RemoveUser(user);
+                searchView.DataSource = list.GetUsers();
+            }
+        }
+
         private void SetFields()
         {
             User user = list.GetUser(searchView.SelectedItemIndex);

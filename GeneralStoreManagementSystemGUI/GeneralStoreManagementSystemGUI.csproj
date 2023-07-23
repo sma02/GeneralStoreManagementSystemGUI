@@ -57,6 +57,12 @@
     <Compile Include="DL\GenericList.cs" />
     <Compile Include="DL\ProductList.cs" />
     <Compile Include="DL\UserList.cs" />
+    <Compile Include="UI\CustomMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CustomMessageBox.Designer.cs">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     <Compile Include="UI\UserView.Designer.cs">
       <DependentUpon>UserView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\CustomMessageBox.resx">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,7 +16,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        [DllImport("DwmApi")] //System.Runtime.InteropServices
+        [DllImport("DwmApi")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
 
         protected override void OnHandleCreated(EventArgs e)
