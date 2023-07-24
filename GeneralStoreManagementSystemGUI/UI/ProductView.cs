@@ -14,6 +14,15 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class ProductView : Form
     {
+        public string ItemName { get => textName.Text; }
+        public double CostPrice { get => double.Parse(textRatePrice.Text); }
+        public double RetailPrice { get => double.Parse(textPrice.Text); }
+        public float TaxPercentage { get => (float)numericTaxPercentage.Value; }
+        public float DiscountPercentage { get => (float)numericTaxPercentage.Value; }
+        public uint Quantity { get => uint.Parse(textQuantity.Text); }
+        public double NetPrice { set => labelNetPrice.Text = value.ToString(); }
+        public float NetProfit { set => labelNetProfit.Text = value.ToString(); }
+
         private ProductView()
         {
             InitializeComponent();
@@ -22,8 +31,18 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.Dock = DockStyle.Fill;
             panelProductData.Visible = false;
             Controls.Add(searchView);
+            searchView.FirstButton.Text = "Add";
+            searchView.FirstButton.Visible = true;
+            searchView.FirstButton.Click += FirstButton_Click;
             searchView.SearchEvent += SearchView_SearchEvent;
         }
+
+        private void FirstButton_Click(object sender, EventArgs e)
+        {
+            searchView.Visible = false;
+            panelProductData.Visible = true;
+        }
+
         public ProductView(ProductList list) : this()
         {
             this.list = list;

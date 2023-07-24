@@ -24,7 +24,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         public string Email { set => textEmail.Text = value; }
         public string Address { set => textAddress.Text = value; }
         public string Id { set => maskedTextID.Text = value; }
-        public DateTime BirthDate { set => customDateTimePicker1.Value = value; }
+        public DateTime BirthDate { set => textBirthDate .Text = value.ToLongDateString(); }
         public string Phone { set => maskedTextPhone.Text = value; }
         private UserView()
         {
