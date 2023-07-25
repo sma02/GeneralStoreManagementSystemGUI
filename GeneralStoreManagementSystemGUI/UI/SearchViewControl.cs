@@ -48,12 +48,10 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             InitializeComponent();
         }
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             SearchEvent?.Invoke(this, null);
         }
-
         private void textBoxSearchTerm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

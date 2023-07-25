@@ -18,8 +18,8 @@ namespace GeneralStoreManagementSystemGUI.BL
         private float netProfitPercentage;
         private double retailPrice;
         private double netPrice;
-        private int quantity;
-        private Product(uint id, string name, double costPrice,int quantity,float taxPercentage,float discountPercentage)
+        private uint quantity;
+        private Product(uint id, string name, double costPrice,uint quantity,float taxPercentage,float discountPercentage)
         {
             Id = id;
             Name = name;
@@ -28,11 +28,11 @@ namespace GeneralStoreManagementSystemGUI.BL
             TaxPercentage = taxPercentage;
             DiscountPercentage = discountPercentage;
         }
-        public Product(uint id, string name, double costPrice, float profitPercentage, int quantity, float taxPercentage = 0, float discountPercentage = 0) : this(id, name, costPrice,quantity,taxPercentage,discountPercentage)
+        public Product(uint id, string name, double costPrice, float profitPercentage, uint quantity, float taxPercentage = 0, float discountPercentage = 0) : this(id, name, costPrice,quantity,taxPercentage,discountPercentage)
         {
             ProfitPercentage = profitPercentage;
         }
-        public Product(uint id, string name, double costPrice, double retailPrice, int quantity, float taxPercentage = 0, float discountPercentage = 0) : this(id, name, costPrice,quantity,taxPercentage,discountPercentage)
+        public Product(uint id, string name, double costPrice, double retailPrice, uint quantity, float taxPercentage = 0, float discountPercentage = 0) : this(id, name, costPrice,quantity,taxPercentage,discountPercentage)
         {
             RetailPrice = retailPrice;
         }
@@ -90,10 +90,10 @@ namespace GeneralStoreManagementSystemGUI.BL
         }
         public float NetProfitPercentage { get => netProfitPercentage; }
         public double NetPrice { get => netPrice; }
-        public int Quantity
+        public uint Quantity
         {
             get => quantity;
-            set => quantity = Math.Abs(value);
+            set => quantity = value;
         }
 
         public override string ToString(string separator)

@@ -1,4 +1,5 @@
-﻿using GeneralStoreManagementSystemGUI.DL;
+﻿using GeneralStoreManagementSystemGUI.BL;
+using GeneralStoreManagementSystemGUI.DL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,22 +16,12 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class ProductView : Form
     {
+        public uint Id { get => uint.Parse(maskedID.Text); }
         public string ItemName { get => textName.Text; }
-        public double CostPrice
-        {
-            get
-            {
-                double result;
-                return double.TryParse(textRate.Text, out result) ? result : 0;
-            }
-        }
+        public double CostPrice => double.TryParse(textRate.Text, out double result) ? result : 0;
         public double RetailPrice
         {
-            get
-            {
-                double result;
-                return double.TryParse(textPrice.Text, out result) ? result : 0;
-            }
+            get => double.TryParse(textPrice.Text, out double result) ? result : 0;
             set => textPrice.Text = Math.Round(value, 2).ToString();
         }
         public float TaxPercentage { get => (float)numericTaxPercentage.Value; }
@@ -49,9 +40,11 @@ namespace GeneralStoreManagementSystemGUI.UI
         private ProductView()
         {
             InitializeComponent();
-            searchView = new SearchViewControl();
-            searchView.Visible = true;
-            searchView.Dock = DockStyle.Fill;
+            searchView = new SearchViewControl
+            {
+                Visible = true,
+                Dock = DockStyle.Fill
+            };
             panelProductData.Visible = false;
             Controls.Add(searchView);
             searchView.FirstButton.Text = "Add";
@@ -61,9 +54,30 @@ namespace GeneralStoreManagementSystemGUI.UI
             textPrice.KeyPress += DecimalPointFields_KeyPress;
             textRate.KeyPress += DecimalPointFields_KeyPress;
             textQuantity.KeyPress += UnsignedNumberFields_KeyPress;
-            AttachTextChangedEvents();
+            AttachRetailPriceChangeTriggers();
+            AttachNetPriceTriggers();
         }
-
+        public ProductView(ProductList list) : this()
+        {
+            this.list = list;
+            searchView.DataSource = this.list.GetProducts();
+            searchView.HeaderTexts = new List<string> { "ID", "Name", "Rate", "Price", "Tax", "Profit", "Discount", "Net Profit", "Net Price", "Q.ty" };
+            DataGridViewColumnCollection columns = searchView.Columns;
+            columns["ID"].DefaultCellStyle.Format = "D5";
+            columns["CostPrice"].DefaultCellStyle.Format = "N2";
+            columns["RetailPrice"].DefaultCellStyle.Format = "N2";
+            columns["TaxPercentage"].DefaultCellStyle.Format = "N2";
+            columns["ProfitPercentage"].DefaultCellStyle.Format = "N2";
+            columns["DiscountPercentage"].DefaultCellStyle.Format = "N2";
+            columns["NetProfitPercentage"].DefaultCellStyle.Format = "N2";
+            columns["NetPrice"].DefaultCellStyle.Format = "N2";
+            //list.AddProduct(new BL.Product(0, "Bread", 20, 5f, 100, 1.5f, 2.5f));
+            list.DataUpdated += DataUpdateHandler;
+        }
+        private void DataUpdateHandler(object sender,EventArgs e)
+        {
+            searchView.DataSource = list.GetProducts();
+        }
         private void UnsignedNumberFields_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar))
@@ -71,7 +85,6 @@ namespace GeneralStoreManagementSystemGUI.UI
                 e.Handled = e.KeyChar != (char)Keys.Back;
             }
         }
-
         private void DecimalPointFields_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -99,28 +112,20 @@ namespace GeneralStoreManagementSystemGUI.UI
             panelProductData.Visible = true;
         }
 
-        public ProductView(ProductList list) : this()
-        {
-            this.list = list;
-            searchView.DataSource = this.list.GetProducts();
-            searchView.HeaderTexts = new List<string> { "ID", "Name", "Rate", "Price", "Tax", "Profit", "Discount", "Net Profit", "Net Price", "Q.ty" };
-            DataGridViewColumnCollection columns = searchView.Columns;
-            columns["ID"].DefaultCellStyle.Format = "D5";
-            columns["CostPrice"].DefaultCellStyle.Format = "N2";
-            columns["RetailPrice"].DefaultCellStyle.Format = "N2";
-            columns["TaxPercentage"].DefaultCellStyle.Format = "N2";
-            columns["ProfitPercentage"].DefaultCellStyle.Format = "N2";
-            columns["DiscountPercentage"].DefaultCellStyle.Format = "N2";
-            columns["NetProfitPercentage"].DefaultCellStyle.Format = "N2";
-            columns["NetPrice"].DefaultCellStyle.Format = "N2";
-            //list.AddProduct(new BL.Product(0, "Bread", 20, 5f, 100, 1.5f, 2.5f));
-        }
         private void SearchView_AddEvent(object sender, EventArgs e)
+        {
+            HideSearchView();
+        }
+        private void ShowSearchView()
+        {
+            panelProductData.Visible = false;
+            searchView.Visible = true;
+        }
+        private void HideSearchView()
         {
             panelProductData.Visible = true;
             searchView.Visible = false;
         }
-
 
         private void SearchView_SearchEvent(object sender, EventArgs e)
         {
@@ -129,12 +134,12 @@ namespace GeneralStoreManagementSystemGUI.UI
      : list.GetProducts(searchView.SearchTerm);
             searchView.DataSource = products;
         }
-        private void AttachTextChangedEvents()
+        private void AttachRetailPriceChangeTriggers()
         {
-            textPrice.TextChanged += textPrice_TextChanged;
-            numericTaxPercentage.ValueChanged += NumericFields_ValueChanged; ;
+            textPrice.TextChanged += ProfitPercentageChangeTriggered;
+            numericTaxPercentage.ValueChanged += NumericFields_ValueChanged;
             numericProfitPercentage.ValueChanged += NumericFields_ValueChanged;
-            textRate.TextChanged += textRate_TextChanged;
+            textRate.TextChanged += TextRate_TextChanged;
         }
 
         private void NumericFields_ValueChanged(object sender, EventArgs e)
@@ -144,43 +149,60 @@ namespace GeneralStoreManagementSystemGUI.UI
             ((NumericUpDown)sender).ValueChanged += NumericFields_ValueChanged;
         }
 
-        private void textRate_TextChanged(object sender, EventArgs e)
+        private void TextRate_TextChanged(object sender, EventArgs e)
         {
             if (((Control)sender).Focused)
             {
                 AdjustRetailPrice();
             }
         }
-        private void textPrice_TextChanged(object sender, EventArgs e)
+        private void ProfitPercentageChangeTriggered(object sender, EventArgs e)
         {
+            numericProfitPercentage.ValueChanged -= NumericFields_ValueChanged;
             if (((Control)sender).Focused)
             {
-                AdjustProfitPercentage();
+                if (CostPrice == 0)
+                {
+                    ProfitPercentage = 0;
+                }
+                else
+                {
+                    ProfitPercentage = (float)((RetailPrice * 100 / CostPrice) - 100);
+                }
             }
+            numericProfitPercentage.ValueChanged += NumericFields_ValueChanged;
         }
         private void AdjustRetailPrice()
         {
-            RetailPrice = CostPrice * (ProfitPercentage + TaxPercentage + 100) / 100;
+            RetailPrice = Math.Round(CostPrice * (ProfitPercentage + TaxPercentage + 100) / 100,2);
         }
-        private void AdjustProfitPercentage()
+        private void AttachNetPriceTriggers()
         {
-            if (CostPrice == 0)
-            {
-                ProfitPercentage = 0;
-            }
-            else
-            {
-                ProfitPercentage = (float)((RetailPrice * 100 / CostPrice) - 100);
-            }
+            textPrice.TextChanged += NetPriceChangeTriggered;
+            numericDiscountPercentage.ValueChanged += NetPriceChangeTriggered;
         }
-        private void AdjustNetProfit()
+        private void NetPriceChangeTriggered(object sender,EventArgs e)
+        {
+            NetPrice = Math.Round((CostPrice * (100 + ProfitPercentage + TaxPercentage - DiscountPercentage))/100,2);
+        }
+        private void NetProfitChangeTriggered(object sender, EventArgs e)
         {
             NetProfit = ProfitPercentage - DiscountPercentage;
         }
 
-        private void PercentageFields_ValueChanged(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-            AdjustNetProfit();
+            try
+            {
+                Product product = new Product(Id, ItemName, CostPrice, ProfitPercentage, Quantity, TaxPercentage, DiscountPercentage);
+                list.AddProduct(product);
+                CustomMessageBox.Show("Product Added Successfully");
+                ShowSearchView();
+            }
+            catch(Exception ex)
+            {
+                CustomMessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -157,7 +157,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.numericProfitPercentage.Name = "numericProfitPercentage";
             this.numericProfitPercentage.Size = new System.Drawing.Size(77, 26);
             this.numericProfitPercentage.TabIndex = 12;
-            this.numericProfitPercentage.ValueChanged += new System.EventHandler(this.PercentageFields_ValueChanged);
+            this.numericProfitPercentage.ValueChanged += new System.EventHandler(this.NetProfitChangeTriggered);
             // 
             // buttonCancel
             // 
@@ -186,6 +186,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonSave.TabIndex = 14;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = false;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // label8
             // 
@@ -277,7 +278,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.numericDiscountPercentage.Name = "numericDiscountPercentage";
             this.numericDiscountPercentage.Size = new System.Drawing.Size(77, 26);
             this.numericDiscountPercentage.TabIndex = 10;
-            this.numericDiscountPercentage.ValueChanged += new System.EventHandler(this.PercentageFields_ValueChanged);
+            this.numericDiscountPercentage.ValueChanged += new System.EventHandler(this.NetProfitChangeTriggered);
             // 
             // numericTaxPercentage
             // 

@@ -12,6 +12,7 @@ namespace GeneralStoreManagementSystemGUI.DL
 {
     public class ProductList : GenericList
     {
+        public event EventHandler DataUpdated;
         protected readonly List<Product> Products;
         public ProductList(string databasePath) : base(databasePath)
         {
@@ -31,11 +32,15 @@ namespace GeneralStoreManagementSystemGUI.DL
         }
         public IEnumerable GetProducts(string searchTerm)
         {
-            return Products.FindAll(x => x.Name.Contains(searchTerm));
+            return Products.FindAll(x => x.Name.ToLower().Contains(searchTerm.ToLower()) || (uint.TryParse(searchTerm, out uint result) ? x.Id == result : false));
         }
         public bool IsExists(string productName)
         {
             return Products.Exists(x => x.Name == productName);
+        }
+        public bool IsExists(uint id)
+        {
+            return Products.Exists(x => x.Id == id);
         }
         public Product GetProduct(string productName)
         {
@@ -43,13 +48,23 @@ namespace GeneralStoreManagementSystemGUI.DL
         }
         public virtual void AddProduct(Product product)
         {
+            if (IsExists(product.Name))
+            {
+                throw new Exception("Product Name Already Exists");
+            }
+            else if (IsExists(product.Id))
+            {
+                throw new Exception("Product Id Already Exists");
+            }
             Products.Add(product);
             StoreData();
+            DataUpdated?.Invoke(this, null);
         }
         public void RemoveProduct(string productName)
         {
             Products.RemoveAll(x => x.Name == productName);
             StoreData();
+            DataUpdated?.Invoke(this, null);
         }
 
         protected override void FromCSV(string data)
@@ -65,7 +80,7 @@ namespace GeneralStoreManagementSystemGUI.DL
                 float profitPercentage = float.Parse(attributes[3]);
                 float taxPercentage = float.Parse(attributes[4]);
                 float discountPercentage = float.Parse(attributes[5]);
-                int quantity = int.Parse(attributes[6]);
+                uint quantity = uint.Parse(attributes[6]);
                 Products.Add(new Product(id, name, costPrice, profitPercentage, quantity, taxPercentage, discountPercentage));
 
             }
