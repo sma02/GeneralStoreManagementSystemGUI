@@ -11,9 +11,15 @@ namespace GeneralStoreManagementSystemGUI.DL
     public class Cart : ProductList
     {
         private ProductList list;
+        public event EventHandler DataChanged;
         public Cart(ProductList list):base()
         {
             this.list = list;
+        }
+        public new void UpdateDataEvent()
+        {
+            base.UpdateDataEvent();
+            DataChanged?.Invoke(this, null);
         }
         public void AddProduct(Product product, uint quantity)
         {
@@ -77,7 +83,11 @@ namespace GeneralStoreManagementSystemGUI.DL
         }
         public double CalculateTotal()
         {
-            return Math.Ceiling(Products.Sum(x => x.RetailPrice));
+            return Math.Round(Products.Sum(x => x.NetPrice),2);
+        }
+        public double CalculateTotalSaved()
+        {
+            return Math.Round(Products.Sum(x => x.DiscountPercentage*x.RetailPrice * x.Quantity)/100,2);
         }
     }
 }

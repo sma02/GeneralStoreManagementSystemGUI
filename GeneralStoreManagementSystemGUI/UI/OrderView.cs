@@ -29,6 +29,8 @@ namespace GeneralStoreManagementSystemGUI.UI
                 }
             }
         }
+        public double TotalSaved { set => labelSave.Text = "Saved = " + value.ToString() + "Rs"; }
+        public double Total { set => labelTotal.Text ="Total = " + value.ToString() + "Rs";}
         public uint Id { get => uint.Parse(textId.Text); set => textId.Text = value.ToString(); }
         public uint Quantity { get => uint.Parse(textQuantity.Text); set => textQuantity.Text = value.ToString(); }
         public List<string> HeaderTexts
@@ -53,6 +55,13 @@ namespace GeneralStoreManagementSystemGUI.UI
             cart.DataUpdated += Cart_DataUpdated;
             textId.KeyPress += UnsignedNumberField_KeyPress;
             textQuantity.KeyPress += UnsignedNumberField_KeyPress;
+            cart.DataChanged += Cart_DataChanged;
+        }
+
+        private void Cart_DataChanged(object sender, EventArgs e)
+        {
+            Total = cart.CalculateTotal();
+            TotalSaved = cart.CalculateTotalSaved();
         }
 
         private void UnsignedNumberField_KeyPress(object sender, KeyPressEventArgs e)
