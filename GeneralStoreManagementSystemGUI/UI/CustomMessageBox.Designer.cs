@@ -76,6 +76,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonNo.Text = "No";
             this.buttonNo.UseVisualStyleBackColor = false;
             this.buttonNo.Visible = false;
+            this.buttonNo.Click += new System.EventHandler(this.buttonNo_Click);
             // 
             // buttonOk
             // 
@@ -106,6 +107,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonYes.Text = "Yes";
             this.buttonYes.UseVisualStyleBackColor = false;
             this.buttonYes.Visible = false;
+            this.buttonYes.Click += new System.EventHandler(this.buttonYes_Click);
             // 
             // panelBody
             // 

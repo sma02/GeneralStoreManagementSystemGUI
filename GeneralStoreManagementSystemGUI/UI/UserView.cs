@@ -53,7 +53,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         private void DeleteUserButton_Click(object sender, EventArgs e)
         {
             User user = list.GetUser(searchView.SelectedItemIndex);
-           DialogResult result =  MessageBox.Show(this,"Are you sure you want to Delete user " + user.Username + "?", "Confirmation", MessageBoxButtons.YesNo);
+           DialogResult result =  CustomMessageBox.Show("Are you sure you want to Delete user " + user.Username + "?", "Confirmation", CustomMessageBox.Type.YesNo);
             if (result == DialogResult.Yes)
             {
                 list.RemoveUser(user);

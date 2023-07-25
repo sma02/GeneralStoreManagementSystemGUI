@@ -12,7 +12,7 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class CustomMessageBox : Form
     {
-        enum Type
+        public enum Type
         {
             Message,
             YesNo
@@ -20,8 +20,9 @@ namespace GeneralStoreManagementSystemGUI.UI
         private CustomMessageBox()
         {
             InitializeComponent();
+            DialogResult = DialogResult.No;
         }
-        public static void Show(string message,string title="")
+        public static void Show(string message, string title = "")
         {
             CustomMessageBox form = new CustomMessageBox();
             form.Text = title;
@@ -30,14 +31,43 @@ namespace GeneralStoreManagementSystemGUI.UI
             form.SetSize();
             form.ShowDialog();
         }
+        public static DialogResult Show(string message, string title, Type type)
+        {
+            CustomMessageBox form = CreateForm(message, title);
+            if (type == Type.YesNo)
+            {
+                form.buttonYes.Visible = true;
+                form.buttonNo.Visible = true;
+                form.SetSize();
+            }
+            return form.ShowDialog();
+        }
+        private static CustomMessageBox CreateForm(string message, string title)
+        {
+            CustomMessageBox form = new CustomMessageBox();
+            form.Text = title;
+            form.labelMessage.Text = message;
+            return form;
+        }
         private void SetSize()
         {
-            int width = labelMessage.Width + panelBody.Padding.Right*4;
-            int height = panelBottom.Height + labelMessage.Height + labelMessage.Location.Y+panelBody.Padding.Bottom*4;
+            int width = labelMessage.Width + panelBody.Padding.Right * 4;
+            int height = panelBottom.Height + labelMessage.Height + labelMessage.Location.Y + panelBody.Padding.Bottom * 4;
             this.Size = new Size(width, height);
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void buttonYes_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Yes;
+            Close();
+        }
+
+        private void buttonNo_Click(object sender, EventArgs e)
         {
             Close();
         }
