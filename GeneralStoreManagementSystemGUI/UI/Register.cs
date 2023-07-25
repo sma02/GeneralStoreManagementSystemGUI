@@ -64,7 +64,7 @@ namespace GeneralStoreManagementSystemGUI.UI
                 user.BirthDate = BirthDate;
                 user.Phone = Phone;
                 database.UserList.RegisterUser(user);
-                MessageBox.Show("Account Registered Successfully and Await Approval by an Admin");
+                CustomMessageBox.Show("Account Registered Successfully and Await Approval by an Admin");
                 Close();
             }
             catch (Exception ex)

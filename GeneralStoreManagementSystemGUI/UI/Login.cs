@@ -38,9 +38,16 @@ namespace GeneralStoreManagementSystemGUI.UI
             User user = database.UserList.AuthenicatedUser(username, password);
             if (user != null)
             {
-                database.CurrentUser = user;
-                DialogResult = DialogResult.OK;
-                Close();
+                if (user.GetType() == typeof(User))
+                {
+                    CustomMessageBox.Show("This account awaits approval by an Admin","Unapproved Account");
+                }
+                else
+                {
+                    database.CurrentUser = user;
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
             }
         }
 
