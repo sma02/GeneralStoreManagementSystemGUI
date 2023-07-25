@@ -22,7 +22,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         public double RetailPrice
         {
             get => double.TryParse(textPrice.Text, out double result) ? result : 0;
-            set => textPrice.Text = Math.Round(value, 2).ToString();
+            set => textPrice.Text = Math.Round(value, 2).ToString("#0.00");
         }
         public float TaxPercentage { get => (float)numericTaxPercentage.Value; }
         public float ProfitPercentage
