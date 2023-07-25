@@ -44,7 +44,12 @@ namespace GeneralStoreManagementSystemGUI.UI
             comboBoxRole.SelectedItem = "User";
             textUsername.KeyPress += TextBoxes_KeyPress;
         }
-
+        public UserView(UserList list) : this()
+        {
+            this.list = list;
+            searchView.DataSource = this.list.GetUsers();
+            list.DataUpdated += DataUpdateHandler;
+        }
         private void DeleteUserButton_Click(object sender, EventArgs e)
         {
             User user = list.GetUser(searchView.SelectedItemIndex);
@@ -52,10 +57,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             if (result == DialogResult.Yes)
             {
                 list.RemoveUser(user);
-                searchView.DataSource = list.GetUsers();
             }
         }
-
         private void SetFields()
         {
             User user = list.GetUser(searchView.SelectedItemIndex);
@@ -74,13 +77,10 @@ namespace GeneralStoreManagementSystemGUI.UI
                   Char.IsSeparator(e.KeyChar) ||
                   Char.IsSymbol(e.KeyChar);
         }
-
-        public UserView(UserList list) : this()
+        private void DataUpdateHandler(object sender, EventArgs e)
         {
-            this.list = list;
-            searchView.DataSource = this.list.GetUsers();
+            searchView.DataSource = list.GetUsers();
         }
-
         private void SearchView_ChangeRoleEvent(object sender, EventArgs e)
         {
             SetFields();
@@ -124,7 +124,6 @@ namespace GeneralStoreManagementSystemGUI.UI
                         throw new Exception("Invalid User");
                 }
                 list.ReplaceUser(user, newUser);
-                searchView.DataSource = list.GetUsers();
                 searchView.Visible = true;
                 panelUserData.Visible = false;
             }

@@ -32,6 +32,16 @@ namespace GeneralStoreManagementSystemGUI.BL
         {
             ProfitPercentage = profitPercentage;
         }
+        public Product(Product product)
+        {
+            Id = product.Id;
+            Name = product.Name;
+            CostPrice = product.CostPrice;
+            ProfitPercentage = product.ProfitPercentage;
+            Quantity = product.Quantity;
+            TaxPercentage = product.TaxPercentage;
+            DiscountPercentage = product.DiscountPercentage;
+        }
         public Product(uint id, string name, double costPrice, double retailPrice, uint quantity, float taxPercentage = 0, float discountPercentage = 0) : this(id, name, costPrice,quantity,taxPercentage,discountPercentage)
         {
             RetailPrice = retailPrice;
@@ -89,8 +99,8 @@ namespace GeneralStoreManagementSystemGUI.BL
             }
         }
         public float NetProfitPercentage { get => netProfitPercentage; }
-        public double NetPrice { get => netPrice; }
-        public uint Quantity
+        public double NetPrice { get => netPrice; set => netPrice = value; }
+        public virtual uint Quantity
         {
             get => quantity;
             set => quantity = value;

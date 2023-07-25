@@ -12,7 +12,6 @@ namespace GeneralStoreManagementSystemGUI.DL
 {
     public class ProductList : GenericList
     {
-        public event EventHandler DataUpdated;
         protected readonly List<Product> Products;
         public ProductList(string databasePath) : base(databasePath)
         {
@@ -26,7 +25,7 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             return Products;
         }
-        public IEnumerable GetProducts()
+        public virtual IEnumerable GetProducts()
         {
             return Products.Select(x=>x).ToList();
         }
@@ -46,6 +45,10 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             return Products.Find(x => x.Name == productName);
         }
+        public Product GetProduct(uint id)
+        {
+            return Products.Find(x => x.Id == id);
+        }
         public virtual void AddProduct(Product product)
         {
             if (IsExists(product.Name))
@@ -58,13 +61,19 @@ namespace GeneralStoreManagementSystemGUI.DL
             }
             Products.Add(product);
             StoreData();
-            DataUpdated?.Invoke(this, null);
+            UpdateDataEvent();
         }
         public void RemoveProduct(string productName)
         {
             Products.RemoveAll(x => x.Name == productName);
             StoreData();
-            DataUpdated?.Invoke(this, null);
+            UpdateDataEvent();
+        }
+        public virtual void RemoveProduct(Product product)
+        {
+            Products.Remove(product);
+            StoreData();
+            UpdateDataEvent();
         }
 
         protected override void FromCSV(string data)

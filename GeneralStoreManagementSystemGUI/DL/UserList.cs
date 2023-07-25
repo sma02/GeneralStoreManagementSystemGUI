@@ -28,6 +28,7 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             if (!AddUser(user)) return false;
             StoreData();
+            UpdateDataEvent();
             return true;
         }
         private static IEnumerable SelectData(List<User> users)
@@ -78,6 +79,7 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             if (!users.Remove(GetUser(username))) return false;
             StoreData();
+            UpdateDataEvent();
             return true;
         }
         public bool RemoveUser(User user)

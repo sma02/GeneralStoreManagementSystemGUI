@@ -10,7 +10,7 @@ namespace GeneralStoreManagementSystemGUI.DL
     public abstract class GenericList
     {
         private readonly string databasePath;
-
+        public event EventHandler DataUpdated;
         protected GenericList(string databasePath)
         {
             this.databasePath = databasePath;
@@ -35,7 +35,10 @@ namespace GeneralStoreManagementSystemGUI.DL
                 FromCSV(FileHandler.Load(databasePath));
             }
         }
-
+        public void UpdateDataEvent()
+        {
+            DataUpdated?.Invoke(this, null);
+        }
         protected abstract void FromCSV(string data);
         protected abstract string ToCSV();
         protected abstract void ClearList();

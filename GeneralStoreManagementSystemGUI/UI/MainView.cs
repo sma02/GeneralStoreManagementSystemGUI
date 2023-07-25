@@ -27,22 +27,23 @@ namespace GeneralStoreManagementSystemGUI.UI
             {
                 AddAdminButtons();
             }
+            else if(database.CurrentUser.GetType()==typeof(Cashier))
+            {
+                AddCashierButtons();
+            }
             panelButtons.Controls.Add(panel);
         }
         private void AddAdminButtons()
         {
             Button userManagementButton = AddButton("User Management");
             Button productManagementButton = AddButton("Product Management");
-            userManagementButton.Click += (s, e) =>
-            {
-                Form form = new UserView(database.UserList);
-                CurrentActiveForm = form;
-            };
-            productManagementButton.Click += (s, e) =>
-            {
-                Form form = new ProductView(database.ProductList);
-                CurrentActiveForm = form;
-            };
+            userManagementButton.Click += (s, e) =>CurrentActiveForm = new UserView(database.UserList);
+            productManagementButton.Click += (s, e) =>CurrentActiveForm = new ProductView(database.ProductList);
+        }
+        private void AddCashierButtons()
+        {
+            Button newOrderButton = AddButton("New Order");
+            newOrderButton.Click += (s, e) => CurrentActiveForm = new OrderView(database.ProductList);
         }
         private Button AddButton(string text)
         {
