@@ -10,13 +10,18 @@ namespace GeneralStoreManagementSystemGUI.DL
 {
     public class Cart : ProductList
     {
-        public void AddProduct(Product product,uint quantity)
+        private ProductList list;
+        public Cart(ProductList list):base()
         {
-            if(product==null)
+            this.list = list;
+        }
+        public void AddProduct(Product product, uint quantity)
+        {
+            if (product == null)
             {
                 throw new Exception("Item ID not Found");
             }
-            else if(quantity==0)
+            else if (quantity == 0)
             {
                 throw new Exception("Quantity cannot be 0");
             }
@@ -36,31 +41,39 @@ namespace GeneralStoreManagementSystemGUI.DL
             {
 
                 item = GetProduct(product.Id);
-                if (item.Quantity + quantity > product.Quantity)
+                if (quantity > product.Quantity)
                 {
                     throw new Exception("Not enough stock (Requested: " + (item.Quantity + quantity) + " Available: " + product.Quantity);
                 }
                 item.Quantity += quantity;
+                item.NetPrice = product.NetPrice * item.Quantity;
             }
-                product.Quantity-=quantity;
+            product.Quantity -= quantity;
             UpdateDataEvent();
+        }
+        public void UpdateQuantity(Product item, uint quantity)
+        {
+            Product product = list.GetProduct(item.Id);
+            item.Quantity = quantity;
+            item.NetPrice = product.NetPrice * item.Quantity;
         }
         public override void AddProduct(Product product)
         {
             AddProduct(product, 1);
         }
-        public override void RemoveProduct(Product product)
+        public override void RemoveProduct(Product item)
         {
-            Products.Remove(product);
+            list.GetProduct(item.Id).Quantity += item.Quantity;
+            Products.Remove(item);
             UpdateDataEvent();
         }
         public override IEnumerable GetProducts()
         {
-            if(Products.Count==0)
+            if (Products.Count == 0)
             {
                 return null;
             }
-            return Products.Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.NetPrice ,x.Quantity}).ToList();
+            return Products.Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.NetPrice, x.Quantity }).ToList();
         }
         public double CalculateTotal()
         {

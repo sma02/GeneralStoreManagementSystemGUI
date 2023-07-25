@@ -100,7 +100,7 @@ namespace GeneralStoreManagementSystemGUI.BL
         }
         public float NetProfitPercentage { get => netProfitPercentage; }
         public double NetPrice { get => netPrice; set => netPrice = value; }
-        public virtual uint Quantity
+        public uint Quantity
         {
             get => quantity;
             set => quantity = value;

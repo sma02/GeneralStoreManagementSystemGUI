@@ -19,7 +19,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             get
             {
-                if(dataGridView.Rows.Count>0)
+                if(dataGridView.SelectedRows.Count>0)
                 {
                     return int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
                 }
@@ -29,8 +29,8 @@ namespace GeneralStoreManagementSystemGUI.UI
                 }
             }
         }
-        public uint Id { get => uint.Parse(textId.Text); }
-        public uint Quantity { get => uint.Parse(textQuantity.Text); }
+        public uint Id { get => uint.Parse(textId.Text); set => textId.Text = value.ToString(); }
+        public uint Quantity { get => uint.Parse(textQuantity.Text); set => textQuantity.Text = value.ToString(); }
         public List<string> HeaderTexts
         {
             set
@@ -49,7 +49,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             InitializeComponent();
             this.list = list;
-            cart = new Cart();
+            cart = new Cart(list);
             cart.DataUpdated += Cart_DataUpdated;
             textId.KeyPress += UnsignedNumberField_KeyPress;
             textQuantity.KeyPress += UnsignedNumberField_KeyPress;
@@ -92,6 +92,7 @@ namespace GeneralStoreManagementSystemGUI.UI
                 {
                     AnnotateDataAttributes();
                 }
+                dataGridView.Rows[dataGridView.Rows.Count-1].Selected = true;
             }
             catch(FormatException)
             {
@@ -109,6 +110,27 @@ namespace GeneralStoreManagementSystemGUI.UI
             {
                 Product product = cart.GetProduct((uint)SelectedItem);
                 cart.RemoveProduct(product);
+            }
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if(SelectedItem!=-1)
+            {
+                Product product = cart.GetProduct((uint)SelectedItem);
+                cart.UpdateQuantity(product, Quantity);
+                int index =  dataGridView.SelectedRows[0].Index;
+                cart.UpdateDataEvent();
+                dataGridView.Rows[index].Selected = true;
+            }
+        }
+
+        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (SelectedItem != -1)
+            {
+                Id = (uint)SelectedItem;
+                Quantity = cart.GetProduct(Id).Quantity;
             }
         }
     }
