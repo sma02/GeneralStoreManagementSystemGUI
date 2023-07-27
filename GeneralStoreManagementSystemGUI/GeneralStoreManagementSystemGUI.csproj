@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BL\Admin.cs" />
     <Compile Include="BL\Cashier.cs" />
+    <Compile Include="BL\PurchaseRecord.cs" />
     <Compile Include="DL\Database.cs" />
     <Compile Include="BL\FileHandler.cs" />
     <Compile Include="BL\Product.cs" />
