@@ -31,11 +31,14 @@ namespace GeneralStoreManagementSystemGUI.UI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.PanelOrderView = new System.Windows.Forms.Panel();
+            this.buttonNewOrder = new System.Windows.Forms.Button();
+            this.buttonConfirm = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelSave = new System.Windows.Forms.Label();
             this.labelTotal = new System.Windows.Forms.Label();
@@ -46,7 +49,6 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.label5 = new System.Windows.Forms.Label();
             this.textQuantity = new System.Windows.Forms.TextBox();
             this.buttonRemove = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.PanelOrderView.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -63,23 +65,23 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(31)))));
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
@@ -89,13 +91,13 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(46)))), ((int)(((byte)(47)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkOrange;
-            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(46)))), ((int)(((byte)(47)))));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle21.NullValue = null;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.DarkOrange;
+            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridView.RowTemplate.Height = 32;
             this.dataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -108,6 +110,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // PanelOrderView
             // 
+            this.PanelOrderView.Controls.Add(this.buttonNewOrder);
+            this.PanelOrderView.Controls.Add(this.buttonConfirm);
             this.PanelOrderView.Controls.Add(this.buttonUpdate);
             this.PanelOrderView.Controls.Add(this.panel1);
             this.PanelOrderView.Controls.Add(this.buttonSearch);
@@ -124,6 +128,48 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.PanelOrderView.Name = "PanelOrderView";
             this.PanelOrderView.Size = new System.Drawing.Size(584, 411);
             this.PanelOrderView.TabIndex = 9;
+            // 
+            // buttonNewOrder
+            // 
+            this.buttonNewOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.buttonNewOrder.FlatAppearance.BorderSize = 0;
+            this.buttonNewOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewOrder.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonNewOrder.Location = new System.Drawing.Point(242, 12);
+            this.buttonNewOrder.Name = "buttonNewOrder";
+            this.buttonNewOrder.Size = new System.Drawing.Size(110, 36);
+            this.buttonNewOrder.TabIndex = 31;
+            this.buttonNewOrder.Text = "New Order";
+            this.buttonNewOrder.UseVisualStyleBackColor = false;
+            this.buttonNewOrder.Click += new System.EventHandler(this.buttonNewOrder_Click);
+            // 
+            // buttonConfirm
+            // 
+            this.buttonConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.buttonConfirm.FlatAppearance.BorderSize = 0;
+            this.buttonConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonConfirm.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonConfirm.Location = new System.Drawing.Point(408, 12);
+            this.buttonConfirm.Name = "buttonConfirm";
+            this.buttonConfirm.Size = new System.Drawing.Size(163, 36);
+            this.buttonConfirm.TabIndex = 32;
+            this.buttonConfirm.Text = "Confirm Order";
+            this.buttonConfirm.UseVisualStyleBackColor = false;
+            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.buttonUpdate.FlatAppearance.BorderSize = 0;
+            this.buttonUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonUpdate.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonUpdate.Location = new System.Drawing.Point(318, 56);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(84, 36);
+            this.buttonUpdate.TabIndex = 28;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = false;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // panel1
             // 
@@ -166,10 +212,10 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonSearch.FlatAppearance.BorderSize = 0;
             this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearch.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonSearch.Location = new System.Drawing.Point(242, 12);
+            this.buttonSearch.Location = new System.Drawing.Point(408, 56);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(175, 36);
-            this.buttonSearch.TabIndex = 33;
+            this.buttonSearch.Size = new System.Drawing.Size(73, 36);
+            this.buttonSearch.TabIndex = 29;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = false;
             // 
@@ -181,11 +227,11 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonAdd.ForeColor = System.Drawing.Color.Gainsboro;
             this.buttonAdd.Location = new System.Drawing.Point(242, 56);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(84, 36);
-            this.buttonAdd.TabIndex = 32;
+            this.buttonAdd.Size = new System.Drawing.Size(70, 36);
+            this.buttonAdd.TabIndex = 27;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = false;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.Add_Entry);
             // 
             // label1
             // 
@@ -206,6 +252,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.textId.Name = "textId";
             this.textId.Size = new System.Drawing.Size(92, 29);
             this.textId.TabIndex = 25;
+            this.textId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textId_KeyDown);
             // 
             // label5
             // 
@@ -225,7 +272,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.textQuantity.Location = new System.Drawing.Point(113, 58);
             this.textQuantity.Name = "textQuantity";
             this.textQuantity.Size = new System.Drawing.Size(123, 29);
-            this.textQuantity.TabIndex = 30;
+            this.textQuantity.TabIndex = 26;
+            this.textQuantity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textQuantity_KeyDown);
             // 
             // buttonRemove
             // 
@@ -236,24 +284,10 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonRemove.Location = new System.Drawing.Point(487, 56);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(84, 36);
-            this.buttonRemove.TabIndex = 9;
+            this.buttonRemove.TabIndex = 30;
             this.buttonRemove.Text = "Remove";
             this.buttonRemove.UseVisualStyleBackColor = false;
             this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.buttonUpdate.FlatAppearance.BorderSize = 0;
-            this.buttonUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonUpdate.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonUpdate.Location = new System.Drawing.Point(372, 56);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(84, 36);
-            this.buttonUpdate.TabIndex = 35;
-            this.buttonUpdate.Text = "Update";
-            this.buttonUpdate.UseVisualStyleBackColor = false;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // OrderView
             // 
@@ -264,6 +298,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.Controls.Add(this.PanelOrderView);
             this.Name = "OrderView";
             this.Text = "OrderView";
+            this.Load += new System.EventHandler(this.OrderView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.PanelOrderView.ResumeLayout(false);
             this.PanelOrderView.PerformLayout();
@@ -289,5 +324,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonConfirm;
+        private System.Windows.Forms.Button buttonNewOrder;
     }
 }

@@ -16,6 +16,11 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             this.list = list;
         }
+        public void Clear()
+        {
+            Products.Clear();
+            UpdateDataEvent();
+        }
         public new void UpdateDataEvent()
         {
             base.UpdateDataEvent();
@@ -72,6 +77,14 @@ namespace GeneralStoreManagementSystemGUI.DL
             list.GetProduct(item.Id).Quantity += item.Quantity;
             Products.Remove(item);
             UpdateDataEvent();
+        }
+        public void RevertOrder()
+        {
+            foreach (Product item in Products)
+            {
+                list.GetProduct(item.Id).Quantity += item.Quantity;
+            }
+            Clear();
         }
         public override IEnumerable GetProducts()
         {

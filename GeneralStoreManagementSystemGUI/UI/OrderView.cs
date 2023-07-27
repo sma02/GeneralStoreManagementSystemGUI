@@ -14,7 +14,9 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class OrderView : Form
     {
+        private Cart cart;
         public object DataSource { set => dataGridView.DataSource = value; }
+        private bool orderProcessed;
         public int SelectedItem
         {
             get
@@ -46,7 +48,6 @@ namespace GeneralStoreManagementSystemGUI.UI
                 }
             }
         }
-        private Cart cart;
         public OrderView(ProductList list)
         {
             InitializeComponent();
@@ -56,6 +57,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             textId.KeyPress += UnsignedNumberField_KeyPress;
             textQuantity.KeyPress += UnsignedNumberField_KeyPress;
             cart.DataChanged += Cart_DataChanged;
+            orderProcessed = false;
         }
 
         private void Cart_DataChanged(object sender, EventArgs e)
@@ -87,10 +89,11 @@ namespace GeneralStoreManagementSystemGUI.UI
             DataSource = cart.GetProducts();
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void Add_Entry(object sender, EventArgs e)
         {
             try
             {
+                dataGridView.SelectionChanged -= dataGridView_SelectionChanged;
                 bool flag = false;
                 if (dataGridView.Columns.Count == 0)
                 {
@@ -102,6 +105,7 @@ namespace GeneralStoreManagementSystemGUI.UI
                     AnnotateDataAttributes();
                 }
                 dataGridView.Rows[dataGridView.Rows.Count-1].Selected = true;
+                dataGridView.SelectionChanged += dataGridView_SelectionChanged;
             }
             catch(FormatException)
             {
@@ -111,6 +115,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             {
                 CustomMessageBox.Show(ex.Message);
             }
+            textQuantity.Focus();
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
@@ -141,6 +146,48 @@ namespace GeneralStoreManagementSystemGUI.UI
                 Id = (uint)SelectedItem;
                 Quantity = cart.GetProduct(Id).Quantity;
             }
+        }
+
+        private void buttonConfirm_Click(object sender, EventArgs e)
+        {
+            dataGridView.Enabled = false;
+            orderProcessed = true;
+            dataGridView.DefaultCellStyle.BackColor = Color.FromArgb(10);
+            dataGridView.ClearSelection();
+        }
+
+        private void buttonNewOrder_Click(object sender, EventArgs e)
+        {
+            if (orderProcessed)
+            {
+                cart.Clear();
+            }
+            else
+            {
+                cart.RevertOrder();
+            }
+            dataGridView.Enabled = true;
+        }
+
+        private void textQuantity_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+            {
+                Add_Entry(sender, e);
+            }
+        }
+
+        private void textId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+            {
+                textQuantity.Focus();
+            }
+        }
+
+        private void OrderView_Load(object sender, EventArgs e)
+        {
+            textId.Focus();
         }
     }
 }
