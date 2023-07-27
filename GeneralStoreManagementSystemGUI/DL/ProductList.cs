@@ -87,6 +87,20 @@ namespace GeneralStoreManagementSystemGUI.DL
             StoreData();
             UpdateDataEvent();
         }
+        public void ReplaceProduct(Product oldProduct,Product newProduct)
+        {
+            if(Products.Exists(x=>x.Id==newProduct.Id&&x.Id!=oldProduct.Id))
+            {
+                throw new Exception("Id already exists");
+            }
+            else if(Products.Exists(x=>x.Name==newProduct.Name && x.Name != oldProduct.Name))
+            {
+                throw new Exception("Product Name Already exists");
+            }
+            Products[Products.FindIndex(x=>x==oldProduct)]= newProduct;
+            StoreData();
+            UpdateDataEvent();
+        }
         public void RemoveProduct(string productName)
         {
             Products.RemoveAll(x => x.Name == productName);

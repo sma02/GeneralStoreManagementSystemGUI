@@ -78,6 +78,7 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             users[users.FindIndex(x => x == oldUser)] = newUser;
             StoreData();
+            UpdateDataEvent();
         }
         public bool RemoveUser(string username)
         {

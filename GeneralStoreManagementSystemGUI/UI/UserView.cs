@@ -40,7 +40,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.FirstButton.Click += SearchView_ChangeRoleEvent;
             searchView.ThirdButton.Text = "Delete User";
             searchView.ThirdButton.Visible = true;
-            searchView.ThirdButton.Click += DeleteUserButton_Click; ;
+            searchView.ThirdButton.Click += DeleteUserButton_Click;
             comboBoxRole.SelectedItem = "User";
             textUsername.KeyPress += TextBoxes_KeyPress;
         }

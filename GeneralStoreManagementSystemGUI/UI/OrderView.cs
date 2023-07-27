@@ -183,6 +183,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             dataGridView.ClearSelection();
             PurchaseRecord record = new PurchaseRecord(purchaseLog.GetInvoiceNumber(), CurrentCashier, list, cart);
             purchaseLog.AddRecord(record);
+            list.StoreData();
 
         }
         private void buttonNewOrder_Click(object sender, EventArgs e)

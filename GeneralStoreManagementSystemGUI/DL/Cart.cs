@@ -65,7 +65,10 @@ namespace GeneralStoreManagementSystemGUI.DL
         public void AddProduct(uint id,uint quantity)
         {
             Product product = list.GetProduct(id);
-            AddProduct(product, quantity);
+            Product item = new Product(product);
+            item.Quantity = quantity;
+            item.NetPrice = product.NetPrice * quantity;
+            Products.Add(item);
         }
         public void UpdateQuantity(Product item, uint quantity)
         {

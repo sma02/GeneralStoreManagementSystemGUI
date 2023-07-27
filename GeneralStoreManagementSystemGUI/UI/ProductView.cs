@@ -16,28 +16,29 @@ namespace GeneralStoreManagementSystemGUI.UI
 {
     public partial class ProductView : Form
     {
-        public uint Id { get => uint.Parse(maskedID.Text); }
-        public string ItemName { get => textName.Text; }
-        public double CostPrice => double.TryParse(textRate.Text, out double result) ? result : 0;
+        public uint Id { get => uint.Parse(maskedID.Text); set => maskedID.Text = value.ToString("D5"); }
+        public string ItemName { get => textName.Text; set => textName.Text = value; }
+        public double CostPrice { get => double.TryParse(textRate.Text, out double result) ? result : 0; set => textRate.Text = value.ToString(); }
         public double RetailPrice
         {
             get => double.TryParse(textPrice.Text, out double result) ? result : 0;
             set => textPrice.Text = Math.Round(value, 2).ToString("#0.00");
         }
-        public float TaxPercentage { get => (float)numericTaxPercentage.Value; }
+        public float TaxPercentage { get => (float)numericTaxPercentage.Value; set => numericTaxPercentage.Value = (decimal)value; }
         public float ProfitPercentage
         {
-            get => (float)numericProfitPercentage.Value; set
+            get => (float)numericProfitPercentage.Value;
+            set
             {
                 numericProfitPercentage.Value = (decimal)value;
             }
         }
-        public float DiscountPercentage { get => (float)numericDiscountPercentage.Value; }
-        public uint Quantity { get => uint.Parse(textQuantity.Text); }
+        public float DiscountPercentage { get => (float)numericDiscountPercentage.Value; set => numericDiscountPercentage.Value = (decimal)value; }
+        public uint Quantity { get => uint.Parse(textQuantity.Text); set => textQuantity.Text = value.ToString(); }
         public double NetPrice { set => labelNetPrice.Text = value.ToString(); }
         public float NetProfit { set => labelNetProfit.Text = value.ToString(); }
-
-        private ProductView()
+        private bool isEdit;
+        public ProductView(ProductList list)
         {
             InitializeComponent();
             searchView = new SearchViewControl
@@ -45,11 +46,23 @@ namespace GeneralStoreManagementSystemGUI.UI
                 Visible = true,
                 Dock = DockStyle.Fill
             };
+            isEdit = false;
+            this.list = list;
+            searchView.DataSource = this.list.GetProducts();
+            SearchViewAttributeAnnotations();
+            list.DataUpdated += DataUpdateHandler;
             panelProductData.Visible = false;
             Controls.Add(searchView);
             searchView.FirstButton.Text = "Add";
             searchView.FirstButton.Visible = true;
-            searchView.FirstButton.Click += FirstButton_Click;
+            searchView.FirstButton.Click += AddProductButton_Click;
+            searchView.SecondButton.Text = "Edit";
+            searchView.SecondButton.Visible = true;
+            searchView.SecondButton.Click += EditProductButton_Click;
+            searchView.ThirdButton.Text = "Delete";
+            searchView.ThirdButton.Visible = true;
+            searchView.ThirdButton.Click += RemoveProductButton_Click;
+            searchView.ItemDoubleClick += SearchView_ItemDoubleClick;
             searchView.SearchEvent += SearchView_SearchEvent;
             textPrice.KeyPress += DecimalPointFields_KeyPress;
             textRate.KeyPress += DecimalPointFields_KeyPress;
@@ -57,10 +70,14 @@ namespace GeneralStoreManagementSystemGUI.UI
             AttachRetailPriceChangeTriggers();
             AttachNetPriceTriggers();
         }
-        public ProductView(ProductList list) : this()
+
+        private void SearchView_ItemDoubleClick(object sender, EventArgs e)
         {
-            this.list = list;
-            searchView.DataSource = this.list.GetProducts();
+            EditProductButton_Click(sender, e);
+        }
+
+        private void SearchViewAttributeAnnotations()
+        {
             searchView.HeaderTexts = new List<string> { "ID", "Name", "Rate", "Price", "Tax", "Profit", "Discount", "Net Profit", "Net Price", "Q.ty" };
             DataGridViewColumnCollection columns = searchView.Columns;
             columns["ID"].DefaultCellStyle.Format = "D5";
@@ -71,10 +88,34 @@ namespace GeneralStoreManagementSystemGUI.UI
             columns["DiscountPercentage"].DefaultCellStyle.Format = "N2";
             columns["NetProfitPercentage"].DefaultCellStyle.Format = "N2";
             columns["NetPrice"].DefaultCellStyle.Format = "N2";
-            //list.AddProduct(new BL.Product(0, "Bread", 20, 5f, 100, 1.5f, 2.5f));
-            list.DataUpdated += DataUpdateHandler;
         }
-        private void DataUpdateHandler(object sender,EventArgs e)
+        private void RemoveProductButton_Click(object sender, EventArgs e)
+        {
+            Product product = list.GetProduct(uint.Parse(searchView.SelectedItem));
+            DialogResult result = CustomMessageBox.Show("Are you sure you want to Delete This Product?", "Confirmation", CustomMessageBox.Type.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                list.RemoveProduct(product);
+            }
+        }
+
+        private void EditProductButton_Click(object sender, EventArgs e)
+        {
+            searchView.Visible = false;
+            panelProductData.Visible = true;
+            uint id = uint.Parse(searchView.SelectedItem);
+            Product product = list.GetProduct(id);
+            Id = product.Id;
+            ItemName = product.Name;
+            CostPrice = product.CostPrice;
+            TaxPercentage = product.TaxPercentage;
+            ProfitPercentage = product.ProfitPercentage;
+            DiscountPercentage = product.DiscountPercentage;
+            Quantity = product.Quantity;
+            isEdit = true;
+        }
+
+        private void DataUpdateHandler(object sender, EventArgs e)
         {
             searchView.DataSource = list.GetProducts();
         }
@@ -106,10 +147,11 @@ namespace GeneralStoreManagementSystemGUI.UI
             }
         }
 
-        private void FirstButton_Click(object sender, EventArgs e)
+        private void AddProductButton_Click(object sender, EventArgs e)
         {
             searchView.Visible = false;
             panelProductData.Visible = true;
+            isEdit = false;
         }
 
         private void SearchView_AddEvent(object sender, EventArgs e)
@@ -174,16 +216,16 @@ namespace GeneralStoreManagementSystemGUI.UI
         }
         private void AdjustRetailPrice()
         {
-            RetailPrice = Math.Round(CostPrice * (ProfitPercentage + TaxPercentage + 100) / 100,2);
+            RetailPrice = Math.Round(CostPrice * (ProfitPercentage + TaxPercentage + 100) / 100, 2);
         }
         private void AttachNetPriceTriggers()
         {
             textPrice.TextChanged += NetPriceChangeTriggered;
             numericDiscountPercentage.ValueChanged += NetPriceChangeTriggered;
         }
-        private void NetPriceChangeTriggered(object sender,EventArgs e)
+        private void NetPriceChangeTriggered(object sender, EventArgs e)
         {
-            NetPrice = Math.Round((CostPrice * (100 + ProfitPercentage + TaxPercentage - DiscountPercentage))/100,2);
+            NetPrice = Math.Round((CostPrice * (100 + ProfitPercentage + TaxPercentage - DiscountPercentage)) / 100, 2);
         }
         private void NetProfitChangeTriggered(object sender, EventArgs e)
         {
@@ -195,14 +237,29 @@ namespace GeneralStoreManagementSystemGUI.UI
             try
             {
                 Product product = new Product(Id, ItemName, CostPrice, ProfitPercentage, Quantity, TaxPercentage, DiscountPercentage);
-                list.AddProduct(product);
-                CustomMessageBox.Show("Product Added Successfully");
+                if (isEdit)
+                {
+                    uint oldId = uint.Parse(searchView.SelectedItem);
+                    list.ReplaceProduct(list.GetProduct(oldId), product);
+                    CustomMessageBox.Show("Product Edited Successfully");
+                }
+                else
+                {
+                    list.AddProduct(product);
+                    CustomMessageBox.Show("Product Added Successfully");
+                }
                 ShowSearchView();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Show(ex.Message);
             }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            searchView.Visible = true;
+            panelProductData.Visible = false;
         }
     }
 }
