@@ -41,9 +41,16 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.ThirdButton.Text = "Delete User";
             searchView.ThirdButton.Visible = true;
             searchView.ThirdButton.Click += DeleteUserButton_Click;
+            searchView.ItemDoubleClick += SearchView_ItemDoubleClick;
             comboBoxRole.SelectedItem = "User";
             textUsername.KeyPress += TextBoxes_KeyPress;
         }
+
+        private void SearchView_ItemDoubleClick(object sender, EventArgs e)
+        {
+            SearchView_ChangeRoleEvent(sender, e);
+        }
+
         public UserView(UserList list) : this()
         {
             this.list = list;
