@@ -43,18 +43,18 @@ namespace GeneralStoreManagementSystemGUI.UI
         private void AddCashierButtons()
         {
             Button newOrderButton = AddButton("New Order");
-            newOrderButton.Click += (s, e) => CurrentActiveForm = new OrderView(database.ProductList);
+            newOrderButton.Click += (s, e) => CurrentActiveForm = new OrderView(database);
         }
         private Button AddButton(string text)
         {
             Button button = new Button();
-            button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            button.Dock = System.Windows.Forms.DockStyle.Top;
+            button.BackColor = Color.FromArgb(45, 50, 50);
+            button.Dock = DockStyle.Top;
             button.FlatAppearance.BorderSize = 0;
-            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            button.ForeColor = System.Drawing.Color.Gainsboro;
-            button.Size = new System.Drawing.Size(200, 38);
+            button.FlatStyle = FlatStyle.Flat;
+            button.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button.ForeColor = Color.Gainsboro;
+            button.Size = new Size(200, 38);
             button.TabIndex = 2;
             button.Text = text;
             button.UseVisualStyleBackColor = false;

@@ -49,10 +49,12 @@ namespace GeneralStoreManagementSystemGUI.UI
                 }
             }
         }
-        public OrderView(ProductList list)
+        public OrderView(Database database)
         {
             InitializeComponent();
-            this.list = list;
+            list = database.ProductList;
+            purchaseLog = database.PurchaseLog;
+            CurrentCashier = (Cashier)database.CurrentUser;
             cart = new Cart(list);
             cart.DataUpdated += Cart_DataUpdated;
             textId.KeyPress += UnsignedNumberField_KeyPress;
@@ -84,7 +86,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             IEnumerable products = string.IsNullOrWhiteSpace(((SearchViewControl)sender).SearchTerm)
 ? list.GetProducts(typeof(Cashier))
-: list.GetProducts(searchView.SearchTerm,typeof(Cashier));
+: list.GetProducts(searchView.SearchTerm, typeof(Cashier));
             searchView.DataSource = products;
         }
 
@@ -179,6 +181,9 @@ namespace GeneralStoreManagementSystemGUI.UI
             orderProcessed = true;
             dataGridView.DefaultCellStyle.BackColor = Color.FromArgb(10);
             dataGridView.ClearSelection();
+            PurchaseRecord record = new PurchaseRecord(purchaseLog.GetInvoiceNumber(), CurrentCashier, list, cart);
+            purchaseLog.AddRecord(record);
+
         }
         private void buttonNewOrder_Click(object sender, EventArgs e)
         {

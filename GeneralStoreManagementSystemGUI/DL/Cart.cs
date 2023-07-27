@@ -116,8 +116,7 @@ namespace GeneralStoreManagementSystemGUI.DL
             {
                 result += item.Id.ToString() + valuesSeperator + item.Quantity + itemSeperator;
             }
-            result.Remove(result.Length - 1, 1);
-            return result;
+          return result.Remove(result.Length - 1, 1);
         }
         protected override void FromCSV(string data)
         {

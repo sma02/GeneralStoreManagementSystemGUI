@@ -11,11 +11,22 @@ namespace GeneralStoreManagementSystemGUI.DL
     class PurchaseLog : GenericList
     {
         private List<PurchaseRecord> records;
-        private Database database;
-        public PurchaseLog(string databasePath,Database database) : base(databasePath)
+        private ProductList productList;
+        private UserList userList;
+        public PurchaseLog(string databasePath,ProductList productList,UserList userList) : base(databasePath)
         {
-            this.database = database;
+            this.productList = productList;
+            this.userList = userList;
             records = new List<PurchaseRecord>();
+        }
+        public uint GetInvoiceNumber()
+        {
+            return (uint)records.Count;
+        }
+        public void AddRecord(PurchaseRecord record)
+        {
+            records.Add(record);
+            StoreData();
         }
         protected override void ClearList()
         {
@@ -33,10 +44,9 @@ namespace GeneralStoreManagementSystemGUI.DL
                 attributes = line.Split(',');
                 uint invoiceNumber = uint.Parse(attributes[0]);
                 string cashierId = attributes[1];
-                double invoiceAmount = double.Parse(attributes[2]);
-                Cashier cashier = (Cashier)database.UserList.GetUserById(cashierId);
-                PurchaseRecord record = new PurchaseRecord(invoiceNumber, cashier, invoiceAmount, database.ProductList);
-                attributes = attributes[3].Split(';');
+                Cashier cashier = (Cashier)userList.GetUserById(cashierId);
+                PurchaseRecord record = new PurchaseRecord(invoiceNumber, cashier,productList);
+                attributes = attributes[2].Split(';');
                 foreach(string attribute in attributes)
                 {
                     string[] values = attribute.Split(':');
@@ -44,6 +54,8 @@ namespace GeneralStoreManagementSystemGUI.DL
                     uint quantity = uint.Parse(values[1]);
                     record.Cart.AddProduct(id, quantity);
                 }
+                record.InvoiceAmount = record.Cart.CalculateTotal();
+                records.Add(record);
             }
         }
 

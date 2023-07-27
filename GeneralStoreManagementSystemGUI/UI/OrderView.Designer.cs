@@ -1,4 +1,5 @@
 ﻿
+using GeneralStoreManagementSystemGUI.BL;
 using GeneralStoreManagementSystemGUI.DL;
 
 namespace GeneralStoreManagementSystemGUI.UI
@@ -312,6 +313,8 @@ namespace GeneralStoreManagementSystemGUI.UI
         #endregion
 
         private ProductList list;
+        private PurchaseLog purchaseLog;
+        private Cashier CurrentCashier;
         private SearchViewControl searchView;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Panel PanelOrderView;
