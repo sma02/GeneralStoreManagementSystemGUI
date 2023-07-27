@@ -57,6 +57,7 @@
     <Compile Include="DL\Cart.cs" />
     <Compile Include="DL\GenericList.cs" />
     <Compile Include="DL\ProductList.cs" />
+    <Compile Include="DL\PurchaseLog.cs" />
     <Compile Include="DL\UserList.cs" />
     <Compile Include="UI\CustomMessageBox.cs">
       <SubType>Form</SubType>

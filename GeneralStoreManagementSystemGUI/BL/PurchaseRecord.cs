@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeneralStoreManagementSystemGUI.DL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,26 +12,23 @@ namespace GeneralStoreManagementSystemGUI.BL
         private uint invoiceNumber;
         private Cashier cashier;
         private double invoiceAmount;
-        private List<uint> itemsIds;
+        private Cart cart;
 
         public uint InvoiceNumber { get => invoiceNumber; set => invoiceNumber = value; }
         public Cashier Cashier { get => cashier; set => cashier = value; }
         public double InvoiceAmount { get => invoiceAmount; set => invoiceAmount = value; }
-        public List<uint> ItemsIds { get => itemsIds; set => itemsIds = value; }
+        public Cart Cart { get => cart; set => cart = value; }
 
-        private string ItemsIdsString()
+        public PurchaseRecord(uint invoiceNumber,Cashier cashier,double invoiceAmount,ProductList list)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach(uint id  in ItemsIds)
-            {
-                stringBuilder.Append(id.ToString()+",");
-            }
-            stringBuilder.Remove(stringBuilder.Length - 1,1);
-            return stringBuilder.ToString();
+            InvoiceNumber = invoiceNumber;
+            Cashier = cashier;
+            InvoiceAmount = invoiceAmount;
+            cart = new Cart(list);
         }
         public override string ToString(string separator)
         {
-            return string.Format("{0}{4}{1}{4}{2}{4}{3}", InvoiceNumber, Cashier.Id, InvoiceAmount,ItemsIdsString(),separator);
+            return string.Format("{0}{4}{1}{4}{2}{4}{3}", InvoiceNumber, Cashier.Id, InvoiceAmount,cart.ToString(),separator);
         }
     }
 }

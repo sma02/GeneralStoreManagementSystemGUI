@@ -58,6 +58,10 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             return users.Find(x => x.Username == username);
         }
+        public User GetUserById(string id)
+        {
+            return users.Find(x => x.Id == id);
+        }
         public User GetUser(int index)
         {
             return users[index];

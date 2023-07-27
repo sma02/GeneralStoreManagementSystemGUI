@@ -12,7 +12,7 @@ namespace GeneralStoreManagementSystemGUI.DL
     {
         private ProductList list;
         public event EventHandler DataChanged;
-        public Cart(ProductList list):base()
+        public Cart(ProductList list) : base()
         {
             this.list = list;
         }
@@ -62,6 +62,11 @@ namespace GeneralStoreManagementSystemGUI.DL
             product.Quantity -= quantity;
             UpdateDataEvent();
         }
+        public void AddProduct(uint id,uint quantity)
+        {
+            Product product = list.GetProduct(id);
+            AddProduct(product, quantity);
+        }
         public void UpdateQuantity(Product item, uint quantity)
         {
             Product product = list.GetProduct(item.Id);
@@ -96,11 +101,36 @@ namespace GeneralStoreManagementSystemGUI.DL
         }
         public double CalculateTotal()
         {
-            return Math.Round(Products.Sum(x => x.NetPrice),2);
+            return Math.Round(Products.Sum(x => x.NetPrice), 2);
         }
         public double CalculateTotalSaved()
         {
-            return Math.Round(Products.Sum(x => x.DiscountPercentage*x.RetailPrice * x.Quantity)/100,2);
+            return Math.Round(Products.Sum(x => x.DiscountPercentage * x.RetailPrice * x.Quantity) / 100, 2);
+        }
+        public override string ToString()
+        {
+            string result = "";
+            char itemSeperator = ';';
+            char valuesSeperator = ':';
+            foreach (Product item in Products)
+            {
+                result += item.Id.ToString() + valuesSeperator + item.Quantity + itemSeperator;
+            }
+            result.Remove(result.Length - 1, 1);
+            return result;
+        }
+        protected override void FromCSV(string data)
+        {
+            string[] records = data.Split(';');
+            string[] attributes;
+            foreach (string record in records)
+            {
+                attributes = record.Split(':');
+                uint id = uint.Parse(attributes[0]);
+                uint quantity = uint.Parse(attributes[1]);
+                Product product = list.GetProduct(id);
+                AddProduct(product, quantity);
+            }
         }
     }
 }
