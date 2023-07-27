@@ -1,5 +1,6 @@
 ﻿using GeneralStoreManagementSystemGUI.BL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GeneralStoreManagementSystemGUI.DL
 {
-    class PurchaseLog : GenericList
+    public class PurchaseLog : GenericList
     {
         private List<PurchaseRecord> records;
         private ProductList productList;
@@ -28,10 +29,28 @@ namespace GeneralStoreManagementSystemGUI.DL
             records.Add(record);
             StoreData();
         }
+        private static IEnumerable SelectAttributes(List<PurchaseRecord> records)
+        {
+            return records.Select(x => new { x.InvoiceNumber, x.Cashier.Id, x.Cashier.Username, x.InvoiceAmount }).ToList();
+        }
+        public IEnumerable GetRecords()
+        {
+            return SelectAttributes(records);
+        }
+        public IEnumerable GetRecords(string searchTerm)
+        {
+            List<PurchaseRecord> purchaseRecords = records.FindAll(x => x.InvoiceNumber.ToString() == searchTerm || x.Cashier.Id.ToString().Contains(searchTerm) || x.Cashier.Username.Contains(searchTerm)).ToList();
+            return SelectAttributes(purchaseRecords);
+        }
+        public PurchaseRecord GetRecord(uint invoiceNumber)
+        {
+            return records.Find(x => x.InvoiceNumber == invoiceNumber);
+        }
         protected override void ClearList()
         {
             records.Clear();
         }
+
 
         protected override void FromCSV(string data)
         {

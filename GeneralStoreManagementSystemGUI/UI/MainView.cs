@@ -37,8 +37,10 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             Button userManagementButton = AddButton("User Management");
             Button productManagementButton = AddButton("Product Management");
+            Button purchaseLogsButton = AddButton("Purchase Logs");
             userManagementButton.Click += (s, e) =>CurrentActiveForm = new UserView(database.UserList);
             productManagementButton.Click += (s, e) =>CurrentActiveForm = new ProductView(database.ProductList);
+            purchaseLogsButton.Click += (s, e) =>CurrentActiveForm = new PurchaseLogView(database.PurchaseLog);
         }
         private void AddCashierButtons()
         {

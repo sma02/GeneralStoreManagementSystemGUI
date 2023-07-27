@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeneralStoreManagementSystemGUI.BL
 {
-    class PurchaseRecord : Serializable
+    public class PurchaseRecord : Serializable
     {
         private uint invoiceNumber;
         private Cashier cashier;
