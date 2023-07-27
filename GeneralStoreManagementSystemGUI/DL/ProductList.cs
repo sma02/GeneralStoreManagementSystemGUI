@@ -29,9 +29,33 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             return Products.Select(x=>x).ToList();
         }
+        public IEnumerable GetProducts(Type type)
+        {
+            if(type==typeof(Cashier))
+            {
+                return Products.Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.NetPrice,x.Quantity }).ToList();
+            }
+            else
+            {
+                return GetProducts();
+            }
+        }
         public IEnumerable GetProducts(string searchTerm)
         {
             return Products.FindAll(x => x.Name.ToLower().Contains(searchTerm.ToLower()) || (uint.TryParse(searchTerm, out uint result) ? x.Id == result : false));
+        }
+        public IEnumerable GetProducts(string searchTerm,Type type)
+        {
+            if (type == typeof(Cashier))
+            {
+                return ((List<Product>)GetProducts(searchTerm))
+                    .Select(x =>new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.NetPrice, x.Quantity })
+                    .ToList();
+            }
+            else
+            {
+                return GetProducts(searchTerm);
+            }
         }
         public bool IsExists(string productName)
         {

@@ -18,8 +18,10 @@ namespace GeneralStoreManagementSystemGUI.UI
         public Button SecondButton => buttonSecond;
         public Button ThirdButton => buttonThird;
         public event EventHandler SearchEvent;
+        public event EventHandler ItemDoubleClick;
         public string SearchTerm { get => textBoxSearchTerm.Text; }
         public int SelectedItemIndex { get => dataGridView.SelectedRows[0].Index; }
+        public string SelectedItem { get => dataGridView.SelectedRows[0].Cells[0].Value.ToString(); }
         public IEnumerable DataSource
         {
             set => dataGridView.DataSource = value;
@@ -58,6 +60,11 @@ namespace GeneralStoreManagementSystemGUI.UI
             {
                 SearchEvent?.Invoke(this, null);
             }
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ItemDoubleClick?.Invoke(this, null);
         }
     }
 }

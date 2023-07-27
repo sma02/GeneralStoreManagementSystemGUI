@@ -1,6 +1,7 @@
 ﻿using GeneralStoreManagementSystemGUI.BL;
 using GeneralStoreManagementSystemGUI.DL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +22,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             get
             {
-                if(dataGridView.SelectedRows.Count>0)
+                if (dataGridView.SelectedRows.Count > 0)
                 {
                     return int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
                 }
@@ -32,7 +33,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             }
         }
         public double TotalSaved { set => labelSave.Text = "Saved = " + value.ToString() + "Rs"; }
-        public double Total { set => labelTotal.Text ="Total = " + value.ToString() + "Rs";}
+        public double Total { set => labelTotal.Text = "Total = " + value.ToString() + "Rs"; }
         public uint Id { get => uint.Parse(textId.Text); set => textId.Text = value.ToString(); }
         public uint Quantity { get => uint.Parse(textQuantity.Text); set => textQuantity.Text = value.ToString(); }
         public List<string> HeaderTexts
@@ -57,7 +58,34 @@ namespace GeneralStoreManagementSystemGUI.UI
             textId.KeyPress += UnsignedNumberField_KeyPress;
             textQuantity.KeyPress += UnsignedNumberField_KeyPress;
             cart.DataChanged += Cart_DataChanged;
+            searchView = new SearchViewControl();
+            searchView.DataSource = this.list.GetProducts(typeof(Cashier));
+            AnnotateDataAttributes(searchView.Columns);
+            List<string> headerTexts = HeaderTexts = new List<string> { "ID", "Name", "Rate", "Tax", "Discount", "Net Price", "Q.ty" };
+            HeaderTexts = headerTexts;
+            searchView.HeaderTexts = headerTexts;
+            searchView.SearchEvent += SearchView_SearchEvent;
+            searchView.ItemDoubleClick += SearchView_ItemDoubleClick;
+            searchView.Visible = false;
+            searchView.Dock = DockStyle.Fill;
+            Controls.Add(searchView);
             orderProcessed = false;
+        }
+
+        private void SearchView_ItemDoubleClick(object sender, EventArgs e)
+        {
+            Id = uint.Parse(searchView.SelectedItem);
+            PanelOrderView.Visible = true;
+            searchView.Visible = false;
+            textQuantity.Focus();
+        }
+
+        private void SearchView_SearchEvent(object sender, EventArgs e)
+        {
+            IEnumerable products = string.IsNullOrWhiteSpace(((SearchViewControl)sender).SearchTerm)
+? list.GetProducts(typeof(Cashier))
+: list.GetProducts(searchView.SearchTerm,typeof(Cashier));
+            searchView.DataSource = products;
         }
 
         private void Cart_DataChanged(object sender, EventArgs e)
@@ -73,11 +101,8 @@ namespace GeneralStoreManagementSystemGUI.UI
                 e.Handled = e.KeyChar != (char)Keys.Back;
             }
         }
-
-        public void AnnotateDataAttributes()
+        public void AnnotateDataAttributes(DataGridViewColumnCollection columns)
         {
-            HeaderTexts = new List<string> { "ID", "Name", "Rate", "Tax", "Discount", "Net Price", "Q.ty" };
-            DataGridViewColumnCollection columns = dataGridView.Columns;
             columns["ID"].DefaultCellStyle.Format = "D5";
             columns["RetailPrice"].DefaultCellStyle.Format = "N2";
             columns["TaxPercentage"].DefaultCellStyle.Format = "N2";
@@ -102,16 +127,16 @@ namespace GeneralStoreManagementSystemGUI.UI
                 cart.AddProduct(list.GetProduct(Id), Quantity);
                 if (flag)
                 {
-                    AnnotateDataAttributes();
+                    AnnotateDataAttributes(dataGridView.Columns);
                 }
-                dataGridView.Rows[dataGridView.Rows.Count-1].Selected = true;
+                dataGridView.Rows[dataGridView.Rows.Count - 1].Selected = true;
                 dataGridView.SelectionChanged += dataGridView_SelectionChanged;
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 CustomMessageBox.Show("Invalid format");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.Show(ex.Message);
             }
@@ -129,11 +154,11 @@ namespace GeneralStoreManagementSystemGUI.UI
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if(SelectedItem!=-1)
+            if (SelectedItem != -1)
             {
                 Product product = cart.GetProduct((uint)SelectedItem);
                 cart.UpdateQuantity(product, Quantity);
-                int index =  dataGridView.SelectedRows[0].Index;
+                int index = dataGridView.SelectedRows[0].Index;
                 cart.UpdateDataEvent();
                 dataGridView.Rows[index].Selected = true;
             }
@@ -155,7 +180,6 @@ namespace GeneralStoreManagementSystemGUI.UI
             dataGridView.DefaultCellStyle.BackColor = Color.FromArgb(10);
             dataGridView.ClearSelection();
         }
-
         private void buttonNewOrder_Click(object sender, EventArgs e)
         {
             if (orderProcessed)
@@ -168,26 +192,29 @@ namespace GeneralStoreManagementSystemGUI.UI
             }
             dataGridView.Enabled = true;
         }
-
         private void textQuantity_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 Add_Entry(sender, e);
             }
         }
-
         private void textId_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 textQuantity.Focus();
             }
         }
-
         private void OrderView_Load(object sender, EventArgs e)
         {
             textId.Focus();
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            searchView.Visible = true;
+            PanelOrderView.Visible = false;
         }
     }
 }
