@@ -76,7 +76,16 @@ namespace GeneralStoreManagementSystemGUI.UI
         {
             EditProductButton_Click(sender, e);
         }
-
+        private void ClearFields()
+        {
+            Id = 0;
+            ItemName = "";
+            CostPrice = 0;
+            ProfitPercentage = 0;
+            TaxPercentage = 0;
+            DiscountPercentage = 0;
+            Quantity = 0;
+        }
         private void SearchViewAttributeAnnotations()
         {
             searchView.HeaderTexts = new List<string> { "ID", "Name", "Rate", "Price", "Tax", "Profit", "Discount", "Net Profit", "Net Price", "Q.ty" };
@@ -153,6 +162,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView.Visible = false;
             panelProductData.Visible = true;
             isEdit = false;
+            ClearFields();
         }
 
         private void SearchView_AddEvent(object sender, EventArgs e)
