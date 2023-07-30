@@ -63,7 +63,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             searchView = new SearchViewControl();
             searchView.DataSource = this.list.GetProducts(typeof(Cashier));
             AnnotateDataAttributes(searchView.Columns);
-            List<string> headerTexts = HeaderTexts = new List<string> { "ID", "Name", "Rate", "Tax", "Discount", "Net Price", "Q.ty" };
+            List<string> headerTexts = HeaderTexts = new List<string> { "ID", "Name", "Rate", "Tax", "Discount", "Q.ty", "Net Price" };
             HeaderTexts = headerTexts;
             searchView.HeaderTexts = headerTexts;
             searchView.SearchEvent += SearchView_SearchEvent;
@@ -129,6 +129,7 @@ namespace GeneralStoreManagementSystemGUI.UI
                 cart.AddProduct(list.GetProduct(Id), Quantity);
                 if (flag)
                 {
+                    HeaderTexts = new List<string> { "ID", "Name", "Rate", "Tax", "Discount", "Q.ty", "Net Price" };
                     AnnotateDataAttributes(dataGridView.Columns);
                 }
                 dataGridView.Rows[dataGridView.Rows.Count - 1].Selected = true;

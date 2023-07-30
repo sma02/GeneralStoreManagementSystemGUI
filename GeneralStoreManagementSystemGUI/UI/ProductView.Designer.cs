@@ -54,6 +54,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.labelProfitValue = new System.Windows.Forms.Label();
             this.panelProductData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericProfitPercentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDiscountPercentage)).BeginInit();
@@ -98,6 +100,8 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // panelProductData
             // 
+            this.panelProductData.Controls.Add(this.label11);
+            this.panelProductData.Controls.Add(this.labelProfitValue);
             this.panelProductData.Controls.Add(this.label10);
             this.panelProductData.Controls.Add(this.numericProfitPercentage);
             this.panelProductData.Controls.Add(this.buttonCancel);
@@ -357,6 +361,31 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.label4.TabIndex = 11;
             this.label4.Text = "Discount  %";
             // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label11.Location = new System.Drawing.Point(216, 303);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(99, 20);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Net Profit Rs";
+            // 
+            // labelProfitValue
+            // 
+            this.labelProfitValue.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelProfitValue.BackColor = System.Drawing.Color.DimGray;
+            this.labelProfitValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelProfitValue.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.labelProfitValue.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelProfitValue.Location = new System.Drawing.Point(214, 334);
+            this.labelProfitValue.Name = "labelProfitValue";
+            this.labelProfitValue.Size = new System.Drawing.Size(150, 20);
+            this.labelProfitValue.TabIndex = 27;
+            this.labelProfitValue.Text = "0";
+            this.labelProfitValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ProductView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -403,5 +432,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown numericProfitPercentage;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelProfitValue;
     }
 }

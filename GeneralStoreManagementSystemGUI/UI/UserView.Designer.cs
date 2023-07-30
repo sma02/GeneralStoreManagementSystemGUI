@@ -32,6 +32,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         private void InitializeComponent()
         {
             this.panelUserData = new System.Windows.Forms.Panel();
+            this.textBirthDate = new System.Windows.Forms.TextBox();
             this.textEmail = new System.Windows.Forms.TextBox();
             this.maskedTextID = new System.Windows.Forms.MaskedTextBox();
             this.textAddress = new System.Windows.Forms.TextBox();
@@ -47,7 +48,6 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBoxRole = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBirthDate = new System.Windows.Forms.TextBox();
             this.panelUserData.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +78,18 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.panelUserData.TabIndex = 0;
             this.panelUserData.Paint += new System.Windows.Forms.PaintEventHandler(this.panelUserData_Paint);
             // 
+            // textBirthDate
+            // 
+            this.textBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBirthDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBirthDate.Enabled = false;
+            this.textBirthDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBirthDate.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBirthDate.Location = new System.Drawing.Point(135, 262);
+            this.textBirthDate.Name = "textBirthDate";
+            this.textBirthDate.Size = new System.Drawing.Size(447, 29);
+            this.textBirthDate.TabIndex = 37;
+            // 
             // textEmail
             // 
             this.textEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -92,7 +104,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // maskedTextID
             // 
-            this.maskedTextID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.maskedTextID.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.maskedTextID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.maskedTextID.Enabled = false;
             this.maskedTextID.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -104,8 +116,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // textAddress
             // 
-            this.textAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textAddress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textAddress.Enabled = false;
             this.textAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -117,8 +128,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Gainsboro;
             this.label8.Location = new System.Drawing.Point(39, 311);
@@ -129,8 +139,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Gainsboro;
             this.label7.Location = new System.Drawing.Point(39, 96);
@@ -141,8 +150,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // maskedTextPhone
             // 
-            this.maskedTextPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.maskedTextPhone.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.maskedTextPhone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.maskedTextPhone.Enabled = false;
             this.maskedTextPhone.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -154,7 +162,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Gainsboro;
             this.label6.Location = new System.Drawing.Point(39, 168);
@@ -165,8 +173,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Gainsboro;
             this.label5.Location = new System.Drawing.Point(131, 237);
@@ -177,7 +184,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Gainsboro;
             this.label4.Location = new System.Drawing.Point(39, 237);
@@ -188,8 +195,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // textUsername
             // 
-            this.textUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textUsername.Enabled = false;
             this.textUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -201,8 +207,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Gainsboro;
             this.label1.Location = new System.Drawing.Point(39, 29);
@@ -243,9 +248,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // comboBoxRole
             // 
-            this.comboBoxRole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxRole.BackColor = System.Drawing.Color.DimGray;
             this.comboBoxRole.DropDownWidth = 486;
             this.comboBoxRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -262,9 +265,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.LightGray;
             this.label3.Location = new System.Drawing.Point(195, 96);
@@ -272,19 +273,6 @@ namespace GeneralStoreManagementSystemGUI.UI
             this.label3.Size = new System.Drawing.Size(42, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Role";
-            // 
-            // textBirthDate
-            // 
-            this.textBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBirthDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBirthDate.Enabled = false;
-            this.textBirthDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBirthDate.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBirthDate.Location = new System.Drawing.Point(135, 262);
-            this.textBirthDate.Name = "textBirthDate";
-            this.textBirthDate.Size = new System.Drawing.Size(447, 29);
-            this.textBirthDate.TabIndex = 37;
             // 
             // UserView
             // 

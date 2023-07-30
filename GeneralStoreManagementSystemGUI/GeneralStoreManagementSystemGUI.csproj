@@ -174,5 +174,11 @@
   <ItemGroup>
     <None Include="Resources\user-img.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\generalStoreimg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\generalStoreimg-removebg-preview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

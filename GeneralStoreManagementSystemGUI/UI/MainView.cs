@@ -21,7 +21,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             InitializeComponent();
             this.database = database;
             activeForm = null;
-            Panel panel = (Panel)panelButtons.Controls[0];
+            Panel panel = (Panel)panelButtons.Controls[1];
             panelButtons.Controls.Remove(panel);
             if (database.CurrentUser.GetType() == typeof(Admin))
             {
@@ -56,7 +56,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             button.FlatStyle = FlatStyle.Flat;
             button.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button.ForeColor = Color.Gainsboro;
-            button.Size = new Size(200, 38);
+            button.Size = new Size(200, 60);
             button.TabIndex = 2;
             button.Text = text;
             button.UseVisualStyleBackColor = false;
@@ -77,6 +77,16 @@ namespace GeneralStoreManagementSystemGUI.UI
                 activeForm.BringToFront();
                 activeForm.Show();
             }
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void MainView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            database.CurrentUser = null;
         }
     }
 }

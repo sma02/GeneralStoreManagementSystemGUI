@@ -35,8 +35,9 @@ namespace GeneralStoreManagementSystemGUI.UI
         }
         public float DiscountPercentage { get => (float)numericDiscountPercentage.Value; set => numericDiscountPercentage.Value = (decimal)value; }
         public uint Quantity { get => uint.Parse(textQuantity.Text); set => textQuantity.Text = value.ToString(); }
-        public double NetPrice { set => labelNetPrice.Text = value.ToString(); }
-        public float NetProfit { set => labelNetProfit.Text = value.ToString(); }
+        public double NetPrice {get=> double.Parse(labelNetPrice.Text); set => labelNetPrice.Text = value.ToString(); }
+        public float NetProfit { get => float.Parse(labelNetProfit.Text); set => labelNetProfit.Text = value.ToString(); }
+        public double NetProfitValue { set => labelProfitValue.Text = value.ToString("N2"); }
         private bool isEdit;
         public ProductView(ProductList list)
         {
@@ -226,6 +227,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         private void NetPriceChangeTriggered(object sender, EventArgs e)
         {
             NetPrice = Math.Round((CostPrice * (100 + ProfitPercentage + TaxPercentage - DiscountPercentage)) / 100, 2);
+            NetProfitValue = (NetProfit *  CostPrice)/100;
         }
         private void NetProfitChangeTriggered(object sender, EventArgs e)
         {

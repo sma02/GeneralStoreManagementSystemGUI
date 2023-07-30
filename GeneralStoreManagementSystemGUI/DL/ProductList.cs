@@ -27,13 +27,13 @@ namespace GeneralStoreManagementSystemGUI.DL
         }
         public virtual IEnumerable GetProducts()
         {
-            return Products.Select(x=>x).ToList();
+            return Products.Select(x => x).ToList();
         }
         public IEnumerable GetProducts(Type type)
         {
-            if(type==typeof(Cashier))
+            if (type == typeof(Cashier))
             {
-                return Products.Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.NetPrice,x.Quantity }).ToList();
+                return Products.Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.Quantity, x.NetPrice }).ToList();
             }
             else
             {
@@ -44,12 +44,12 @@ namespace GeneralStoreManagementSystemGUI.DL
         {
             return Products.FindAll(x => x.Name.ToLower().Contains(searchTerm.ToLower()) || (uint.TryParse(searchTerm, out uint result) ? x.Id == result : false));
         }
-        public IEnumerable GetProducts(string searchTerm,Type type)
+        public IEnumerable GetProducts(string searchTerm, Type type)
         {
             if (type == typeof(Cashier))
             {
                 return ((List<Product>)GetProducts(searchTerm))
-                    .Select(x =>new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.NetPrice, x.Quantity })
+                    .Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.Quantity, x.NetPrice })
                     .ToList();
             }
             else
@@ -87,17 +87,17 @@ namespace GeneralStoreManagementSystemGUI.DL
             StoreData();
             UpdateDataEvent();
         }
-        public void ReplaceProduct(Product oldProduct,Product newProduct)
+        public void ReplaceProduct(Product oldProduct, Product newProduct)
         {
-            if(Products.Exists(x=>x.Id==newProduct.Id&&x.Id!=oldProduct.Id))
+            if (Products.Exists(x => x.Id == newProduct.Id && x.Id != oldProduct.Id))
             {
                 throw new Exception("Id already exists");
             }
-            else if(Products.Exists(x=>x.Name==newProduct.Name && x.Name != oldProduct.Name))
+            else if (Products.Exists(x => x.Name == newProduct.Name && x.Name != oldProduct.Name))
             {
                 throw new Exception("Product Name Already exists");
             }
-            Products[Products.FindIndex(x=>x==oldProduct)]= newProduct;
+            Products[Products.FindIndex(x => x == oldProduct)] = newProduct;
             StoreData();
             UpdateDataEvent();
         }

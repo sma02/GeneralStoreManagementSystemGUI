@@ -62,7 +62,7 @@ namespace GeneralStoreManagementSystemGUI.DL
             product.Quantity -= quantity;
             UpdateDataEvent();
         }
-        public void AddProduct(uint id,uint quantity)
+        public void AddProduct(uint id, uint quantity)
         {
             Product product = list.GetProduct(id);
             Product item = new Product(product);
@@ -100,7 +100,7 @@ namespace GeneralStoreManagementSystemGUI.DL
             {
                 return null;
             }
-            return Products.Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.NetPrice, x.Quantity }).ToList();
+            return Products.Select(x => new { x.Id, x.Name, x.RetailPrice, x.TaxPercentage, x.DiscountPercentage, x.Quantity, x.NetPrice }).ToList();
         }
         public double CalculateTotal()
         {
@@ -119,7 +119,7 @@ namespace GeneralStoreManagementSystemGUI.DL
             {
                 result += item.Id.ToString() + valuesSeperator + item.Quantity + itemSeperator;
             }
-          return result.Remove(result.Length - 1, 1);
+            return result.Remove(result.Length - 1, 1);
         }
         protected override void FromCSV(string data)
         {
