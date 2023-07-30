@@ -61,7 +61,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             textQuantity.KeyPress += UnsignedNumberField_KeyPress;
             cart.DataChanged += Cart_DataChanged;
             searchView = new SearchViewControl();
-            searchView.DataSource = this.list.GetProducts(typeof(Cashier));
+            searchView.DataSource = list.GetProducts(typeof(Cashier));
             AnnotateDataAttributes(searchView.Columns);
             List<string> headerTexts = HeaderTexts = new List<string> { "ID", "Name", "Rate", "Tax", "Discount", "Q.ty", "Net Price" };
             HeaderTexts = headerTexts;
@@ -185,6 +185,7 @@ namespace GeneralStoreManagementSystemGUI.UI
             PurchaseRecord record = new PurchaseRecord(purchaseLog.GetInvoiceNumber(), CurrentCashier, list, cart);
             purchaseLog.AddRecord(record);
             list.StoreData();
+            searchView.DataSource = list.GetProducts(typeof(Cashier));
 
         }
         private void buttonNewOrder_Click(object sender, EventArgs e)

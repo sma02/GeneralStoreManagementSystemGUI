@@ -126,8 +126,8 @@ namespace GeneralStoreManagementSystemGUI.DL
                 string name = attributes[1];
                 double costPrice = double.Parse(attributes[2]);
                 float profitPercentage = float.Parse(attributes[3]);
-                float taxPercentage = float.Parse(attributes[4]);
-                float discountPercentage = float.Parse(attributes[5]);
+                float discountPercentage = float.Parse(attributes[4]);
+                float taxPercentage = float.Parse(attributes[5]);
                 uint quantity = uint.Parse(attributes[6]);
                 Products.Add(new Product(id, name, costPrice, profitPercentage, quantity, taxPercentage, discountPercentage));
 

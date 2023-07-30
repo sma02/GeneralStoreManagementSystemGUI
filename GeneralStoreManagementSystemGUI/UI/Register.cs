@@ -19,7 +19,7 @@ namespace GeneralStoreManagementSystemGUI.UI
         public string Email { get => textEmail.Text; }
         public string Address { get => textAddress.Text; }
         public string Id { get => maskedTextID.Text; }
-        public DateTime BirthDate { get => customDateTimePicker1.Value; }
+        public DateTime BirthDate { get => customDateTimePicker1.Value.Date; }
         public string Phone { get => maskedTextPhone.Text; }
         public Register(Database database)
         {
